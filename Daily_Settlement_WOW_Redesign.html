@@ -1,0 +1,2894 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Daily Settlement</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+:root,[data-theme="light"]{
+  --bg:#f0ede8;--card:#fff;
+  --sh:0 2px 8px rgba(0,0,0,.06),0 0 0 1px rgba(0,0,0,.04);
+  --sh-hover:0 6px 24px rgba(0,0,0,.11),0 0 0 1px rgba(0,0,0,.05);
+  --hbg:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);
+  --hbdr:#1e3a5f;
+  --tx:#1a1a1a;--tx2:#555;--tx3:#999;
+  --bdr:#f0f0f0;--bbg:#fff;--bbdr:#eee;
+  --cpbg:#f8f8f8;--fmbg:#fafafa;
+}
+/* OCEAN theme */
+[data-theme="ocean"]{
+  --bg:#e8f4f8;--card:#fff;
+  --sh:0 2px 8px rgba(0,80,120,.08),0 0 0 1px rgba(0,80,120,.05);
+  --sh-hover:0 6px 24px rgba(0,80,120,.14),0 0 0 1px rgba(0,80,120,.07);
+  --hbg:linear-gradient(135deg,#006994 0%,#0099cc 50%,#00bcd4 100%);
+  --hbdr:#0088bb;
+  --tx:#003344;--tx2:#006688;--tx3:#88aacc;
+  --bdr:#d0eaf5;--bbg:#fff;--bbdr:#c0dff0;
+  --cpbg:#e8f4f8;--fmbg:#f0f8fc;
+}
+/* FOREST theme */
+[data-theme="forest"]{
+  --bg:#e8f0e8;--card:#fff;
+  --sh:0 2px 8px rgba(0,80,0,.08),0 0 0 1px rgba(0,80,0,.05);
+  --sh-hover:0 6px 24px rgba(0,80,0,.14),0 0 0 1px rgba(0,80,0,.07);
+  --hbg:linear-gradient(135deg,#1a3a1a 0%,#2d5a2d 50%,#1a6b3a 100%);
+  --hbdr:#2d6b2d;
+  --tx:#1a3a1a;--tx2:#2d6b2d;--tx3:#88aa88;
+  --bdr:#d0e8d0;--bbg:#fff;--bbdr:#c0ddc0;
+  --cpbg:#e8f0e8;--fmbg:#f0f5f0;
+}
+/* SUNSET theme */
+[data-theme="sunset"]{
+  --bg:#fdf0e8;--card:#fff;
+  --sh:0 2px 8px rgba(200,80,0,.08),0 0 0 1px rgba(200,80,0,.05);
+  --sh-hover:0 6px 24px rgba(200,80,0,.14),0 0 0 1px rgba(200,80,0,.07);
+  --hbg:linear-gradient(135deg,#7b2d00 0%,#c2440f 50%,#e8722a 100%);
+  --hbdr:#c2440f;
+  --tx:#3a1500;--tx2:#7b2d00;--tx3:#cc8866;
+  --bdr:#f5ddd0;--bbg:#fff;--bbdr:#f0cfc0;
+  --cpbg:#fdf0e8;--fmbg:#fef5f0;
+}
+/* PURPLE theme */
+[data-theme="purple"]{
+  --bg:#f0e8f8;--card:#fff;
+  --sh:0 2px 8px rgba(80,0,150,.08),0 0 0 1px rgba(80,0,150,.05);
+  --sh-hover:0 6px 24px rgba(80,0,150,.14),0 0 0 1px rgba(80,0,150,.07);
+  --hbg:linear-gradient(135deg,#2d0060 0%,#6b21a8 50%,#9333ea 100%);
+  --hbdr:#7c3aed;
+  --tx:#1a0030;--tx2:#6b21a8;--tx3:#aa88cc;
+  --bdr:#e8d5f8;--bbg:#fff;--bbdr:#ddc8f5;
+  --cpbg:#f5eeff;--fmbg:#f8f0ff;
+}
+/* MIDNIGHT theme */
+[data-theme="midnight"]{
+  --bg:#0a0a12;--card:#12121e;
+  --sh:0 2px 12px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.04);
+  --sh-hover:0 6px 28px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.07);
+  --hbg:linear-gradient(135deg,#050510 0%,#0a0a20 50%,#050518 100%);
+  --hbdr:#1a1a30;
+  --tx:#e0e0ff;--tx2:#8888cc;--tx3:#444466;
+  --bdr:#1a1a2e;--bbg:#12121e;--bbdr:#1a1a2e;
+  --cpbg:#0d0d1a;--fmbg:#0d0d1a;
+}
+[data-theme="dark"]{
+  --bg:#0d0d0d;--card:#1a1a1a;
+  --sh:0 2px 12px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.04);
+  --sh-hover:0 6px 28px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.07);
+  --hbg:linear-gradient(135deg,#0a0a14 0%,#0d1220 50%,#071628 100%);
+  --hbdr:#1a2a40;
+  --tx:#f0f0f0;--tx2:#aaa;--tx3:#555;
+  --bdr:#252525;--bbg:#1a1a1a;--bbdr:#252525;
+  --cpbg:#111;--fmbg:#111;
+}
+/* ROSE theme */
+[data-theme="rose"]{
+  --bg:#fff1f2;--card:#fff;
+  --sh:0 2px 8px rgba(200,0,50,.07),0 0 0 1px rgba(200,0,50,.04);
+  --sh-hover:0 6px 24px rgba(200,0,50,.13),0 0 0 1px rgba(200,0,50,.06);
+  --hbg:linear-gradient(135deg,#881337 0%,#be123c 50%,#f43f5e 100%);
+  --hbdr:#be123c;
+  --tx:#1a0008;--tx2:#881337;--tx3:#fda4af;
+  --bdr:#fecdd3;--bbg:#fff;--bbdr:#fda4af;
+  --cpbg:#fff1f2;--fmbg:#fff5f6;
+}
+/* TEAL theme */
+[data-theme="teal"]{
+  --bg:#e6fafa;--card:#fff;
+  --sh:0 2px 8px rgba(0,128,128,.08),0 0 0 1px rgba(0,128,128,.05);
+  --sh-hover:0 6px 24px rgba(0,128,128,.14),0 0 0 1px rgba(0,128,128,.07);
+  --hbg:linear-gradient(135deg,#042f2e 0%,#0f766e 50%,#14b8a6 100%);
+  --hbdr:#0f766e;
+  --tx:#012a29;--tx2:#0f766e;--tx3:#5eead4;
+  --bdr:#ccfbf1;--bbg:#fff;--bbdr:#99f6e4;
+  --cpbg:#e6fafa;--fmbg:#f0fdfc;
+}
+/* COFFEE theme */
+[data-theme="coffee"]{
+  --bg:#fdf6f0;--card:#fffaf7;
+  --sh:0 2px 8px rgba(100,50,0,.07),0 0 0 1px rgba(100,50,0,.04);
+  --sh-hover:0 6px 24px rgba(100,50,0,.12),0 0 0 1px rgba(100,50,0,.06);
+  --hbg:linear-gradient(135deg,#1c0a00 0%,#4a2500 50%,#7c4a1e 100%);
+  --hbdr:#5c3010;
+  --tx:#1c0a00;--tx2:#6b3a1f;--tx3:#c4956a;
+  --bdr:#f0ddd0;--bbg:#fffaf7;--bbdr:#e8ccb8;
+  --cpbg:#fdf6f0;--fmbg:#fef9f5;
+}
+/* SLATE theme */
+[data-theme="slate"]{
+  --bg:#f1f5f9;--card:#fff;
+  --sh:0 2px 8px rgba(30,41,59,.07),0 0 0 1px rgba(30,41,59,.04);
+  --sh-hover:0 6px 24px rgba(30,41,59,.13),0 0 0 1px rgba(30,41,59,.06);
+  --hbg:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#334155 100%);
+  --hbdr:#334155;
+  --tx:#0f172a;--tx2:#475569;--tx3:#94a3b8;
+  --bdr:#e2e8f0;--bbg:#fff;--bbdr:#cbd5e1;
+  --cpbg:#f1f5f9;--fmbg:#f8fafc;
+}
+/* GALAXY dark theme */
+[data-theme="galaxy"]{
+  --bg:#08001a;--card:#110022;
+  --sh:0 2px 12px rgba(120,0,200,.3),0 0 0 1px rgba(180,100,255,.08);
+  --sh-hover:0 6px 28px rgba(120,0,200,.5),0 0 0 1px rgba(180,100,255,.12);
+  --hbg:linear-gradient(135deg,#0a001f 0%,#1e0a4e 50%,#2d0060 100%);
+  --hbdr:#3b0080;
+  --tx:#e9d5ff;--tx2:#a78bfa;--tx3:#6d28d9;
+  --bdr:#1e0a4e;--bbg:#110022;--bbdr:#2d0060;
+  --cpbg:#0d001f;--fmbg:#0d001f;
+}
+/* LAVA dark theme */
+[data-theme="lava"]{
+  --bg:#0d0000;--card:#1a0000;
+  --sh:0 2px 12px rgba(200,0,0,.3),0 0 0 1px rgba(255,100,0,.08);
+  --sh-hover:0 6px 28px rgba(200,0,0,.5),0 0 0 1px rgba(255,100,0,.12);
+  --hbg:linear-gradient(135deg,#1c0000 0%,#7f1d1d 50%,#dc2626 100%);
+  --hbdr:#7f1d1d;
+  --tx:#fecaca;--tx2:#f87171;--tx3:#7f1d1d;
+  --bdr:#3b0000;--bbg:#1a0000;--bbdr:#5c0000;
+  --cpbg:#0d0000;--fmbg:#0d0000;
+}
+/* AURORA dark theme */
+[data-theme="aurora"]{
+  --bg:#020c10;--card:#041a18;
+  --sh:0 2px 12px rgba(0,150,136,.25),0 0 0 1px rgba(0,200,180,.08);
+  --sh-hover:0 6px 28px rgba(0,150,136,.4),0 0 0 1px rgba(0,200,180,.12);
+  --hbg:linear-gradient(135deg,#020c10 0%,#042a1e 40%,#065f46 100%);
+  --hbdr:#065f46;
+  --tx:#a7f3d0;--tx2:#34d399;--tx3:#065f46;
+  --bdr:#042a1e;--bbg:#041a18;--bbdr:#065f46;
+  --cpbg:#020c10;--fmbg:#031510;
+}
+[data-theme="rose"] .ch.or{background:linear-gradient(90deg,#fff1f2,#ffe4e6);color:#be123c;}
+[data-theme="rose"] .ch.bl{background:linear-gradient(90deg,#fff1f2,#ffe4e6);color:#9f1239;}
+[data-theme="rose"] .ch.pu{background:linear-gradient(90deg,#fff1f2,#ffe4e6);color:#881337;}
+[data-theme="rose"] .ch.gr{background:linear-gradient(90deg,#fff1f2,#ffe4e6);color:#9f1239;}
+[data-theme="teal"] .ch.or{background:linear-gradient(90deg,#e6fafa,#ccfbf1);color:#0f766e;}
+[data-theme="teal"] .ch.bl{background:linear-gradient(90deg,#e6fafa,#ccfbf1);color:#0d9488;}
+[data-theme="teal"] .ch.pu{background:linear-gradient(90deg,#e6fafa,#ccfbf1);color:#0f766e;}
+[data-theme="teal"] .ch.gr{background:linear-gradient(90deg,#e6fafa,#ccfbf1);color:#059669;}
+[data-theme="coffee"] .ch.or{background:linear-gradient(90deg,#fdf6f0,#faeee4);color:#7c4a1e;}
+[data-theme="galaxy"] .ch.or{background:linear-gradient(90deg,#0d001f,#1a0038);color:#c084fc;}
+[data-theme="galaxy"] .ch.bl{background:linear-gradient(90deg,#0d001f,#1a0038);color:#a78bfa;}
+[data-theme="galaxy"] .ch.pu{background:linear-gradient(90deg,#0d001f,#1a0038);color:#e879f9;}
+[data-theme="galaxy"] .ch.gr{background:linear-gradient(90deg,#0d001f,#1a0038);color:#34d399;}
+[data-theme="galaxy"] .ch.gy{background:linear-gradient(90deg,#0d001f,#1a0038);color:#a78bfa;}
+[data-theme="lava"] .ch.or{background:linear-gradient(90deg,#1a0000,#2d0000);color:#f87171;}
+[data-theme="lava"] .ch.bl{background:linear-gradient(90deg,#1a0000,#2d0000);color:#fca5a5;}
+[data-theme="lava"] .ch.pu{background:linear-gradient(90deg,#1a0000,#2d0000);color:#f97316;}
+[data-theme="lava"] .ch.gr{background:linear-gradient(90deg,#1a0000,#2d0000);color:#fb923c;}
+[data-theme="lava"] .ch.gy{background:linear-gradient(90deg,#1a0000,#2d0000);color:#f87171;}
+[data-theme="aurora"] .ch.or{background:linear-gradient(90deg,#031510,#042a1e);color:#34d399;}
+[data-theme="aurora"] .ch.bl{background:linear-gradient(90deg,#031510,#042a1e);color:#5eead4;}
+[data-theme="aurora"] .ch.pu{background:linear-gradient(90deg,#031510,#042a1e);color:#a7f3d0;}
+[data-theme="aurora"] .ch.gr{background:linear-gradient(90deg,#031510,#042a1e);color:#6ee7b7;}
+[data-theme="aurora"] .ch.gy{background:linear-gradient(90deg,#031510,#042a1e);color:#34d399;}
+body{font-family:'Inter','Noto Sans Bengali',sans-serif;background:var(--bg);min-height:100vh;padding:0 0 120px;transition:background .3s;}
+@keyframes pulse{0%,100%{opacity:.3;transform:scale(.8);}50%{opacity:1;transform:scale(1.2);}}
+input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 1000px var(--card) inset!important;-webkit-text-fill-color:var(--tx)!important;transition:background-color 5000s ease-in-out 0s;}
+input::-webkit-contacts-auto-fill-button,input::-webkit-credentials-auto-fill-button{display:none!important;visibility:hidden!important;}
+.pin-overlay{position:fixed;inset:0;background:linear-gradient(135deg,#0f172a,#1e1b4b);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
+.pin-box{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:32px 28px;width:300px;text-align:center;}
+.pin-title{color:#fff;font-size:18px;font-weight:800;margin-bottom:6px;}
+.pin-sub{color:#8899bb;font-size:13px;margin-bottom:24px;}
+.pin-dots{display:flex;gap:12px;justify-content:center;margin-bottom:24px;}
+.pin-dot{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.2);transition:background .2s;}
+.pin-dot.filled{background:#f59e0b;}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.pin-btn{padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.08);color:#fff;font-size:18px;font-weight:700;cursor:pointer;transition:background .15s;}
+.pin-btn:hover{background:rgba(255,255,255,.16);}
+.pin-btn:active{transform:scale(.95);}
+.pin-err{color:#f87171;font-size:13px;margin-top:-10px;}
+.pin-setup-link{color:#8899bb;font-size:12px;cursor:pointer;text-decoration:underline;margin-top:4px;}
+
+/* HEADER */
+.hdr{background:var(--hbg);color:#fff;padding:10px 14px 0;position:sticky;top:0;z-index:200;box-shadow:0 4px 24px rgba(0,0,0,.4);}
+.hdr-top{display:flex;justify-content:space-between;align-items:center;}
+.hdr-brand{display:flex;align-items:center;gap:8px;}
+.hdr-logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#f59e0b,#ef4444);display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 2px 8px rgba(245,158,11,.4);}
+.hdr-title{font-size:15px;font-weight:800;letter-spacing:-.3px;}
+.hdr-date{font-size:10px;color:#8899bb;margin-top:0;}
+.hdr-right{display:flex;align-items:center;gap:8px;}
+.hdr-due{text-align:right;}
+.hdr-due-label{font-size:10px;color:#8899bb;}
+.hdr-due-val{font-size:17px;font-weight:800;color:#4ade80;letter-spacing:-.3px;line-height:1.1;}
+.theme-btn{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.1);border:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.theme-btn:hover{background:rgba(255,255,255,.2);}
+.hdr-stats{display:flex;margin-top:8px;border-top:1px solid var(--hbdr);padding-top:7px;padding-bottom:7px;}
+.stat{flex:1;text-align:center;border-right:1px solid var(--hbdr);}
+.stat:last-child{border-right:none;}
+.stat-val{font-size:12px;font-weight:700;}
+.stat-val.red{color:#f87171;}.stat-val.green{color:#4ade80;}.stat-val.wh{color:#fff;}
+.stat-label{font-size:9px;color:#8899bb;margin-top:1px;}
+
+/* TABS */
+.tabs{display:flex;background:var(--hbg);border-bottom:1px solid var(--hbdr);position:sticky;top:0;z-index:199;transition:top .3s;}
+.tab{flex:1;padding:10px 6px;font-size:12px;font-weight:600;color:#8899bb;background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;}
+.tab.active{color:#f59e0b;border-bottom-color:#f59e0b;}
+.tab-panel{display:none;opacity:0;transform:translateX(10px);}
+.tab-panel.active{display:block;animation:tabSlide .25s ease forwards;}
+@keyframes tabSlide{from{opacity:0;transform:translateX(10px);}to{opacity:1;transform:translateX(0);}}
+.con{max-width:600px;margin:0 auto;padding:14px;}
+
+/* CARDS */
+.card{background:var(--card);border-radius:18px;margin-bottom:12px;overflow:hidden;box-shadow:var(--sh);transition:background .3s,box-shadow .2s,transform .2s;}
+.card:hover{box-shadow:var(--sh-hover);transform:translateY(-1px);}
+.ch{padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:7px;}
+.ch.or{background:linear-gradient(90deg,#fff4ec,#fff9f5);color:#c2440f;}
+.ch.bl{background:linear-gradient(90deg,#eff6ff,#f5f9ff);color:#1d4ed8;}
+.ch.pu{background:linear-gradient(90deg,#faf5ff,#fdf8ff);color:#6b21a8;}
+.ch.gr{background:linear-gradient(90deg,#f0fdf4,#f5fff7);color:#166534;}
+.ch.gy{background:linear-gradient(90deg,#f8f8f8,#fbfbfb);color:#444;}
+[data-theme="dark"] .ch.or{background:linear-gradient(90deg,#2a1500,#1e1000);color:#fb923c;}
+[data-theme="dark"] .ch.bl{background:linear-gradient(90deg,#0c1a2e,#081220);color:#60a5fa;}
+[data-theme="dark"] .ch.pu{background:linear-gradient(90deg,#1a0a2e,#120620);color:#c084fc;}
+[data-theme="dark"] .ch.gr{background:linear-gradient(90deg,#052010,#031508);color:#4ade80;}
+[data-theme="dark"] .ch.gy{background:linear-gradient(90deg,#1a1a1a,#141414);color:#aaa;}
+.field{display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid var(--bdr);gap:12px;}
+.field:last-child{border-bottom:none;}
+.fl{font-size:14px;color:var(--tx2);flex:1;}
+.fi{width:170px;text-align:right;border:none;outline:none;font-size:16px;font-weight:600;color:var(--tx);background:transparent;font-family:'Inter',sans-serif;padding:4px 0;border-bottom:2px solid transparent;transition:border-color .2s,box-shadow .2s;}
+.fi:focus{border-bottom-color:var(--accent)!important;box-shadow:0 4px 12px rgba(245,158,11,.15);border-radius:4px;}
+.fi:focus{border-bottom-color:#f59e0b;}
+.fi::placeholder{color:#ccc;font-weight:400;}
+.fd{width:170px;text-align:right;font-size:15px;font-weight:700;font-family:'Inter',sans-serif;}
+input[type="date"]{width:170px;text-align:right;border:none;outline:none;font-size:16px;font-weight:600;color:var(--tx);background:transparent;cursor:pointer;font-family:'Inter',sans-serif;}
+.rr{display:flex;justify-content:space-between;padding:10px 16px;font-size:14px;border-bottom:1px solid var(--bdr);}
+.rr:last-child{border-bottom:none;}
+.rr .rl{color:var(--tx2);}.rr .rv{font-weight:700;color:var(--tx);font-family:'Inter',sans-serif;}
+.fmr{padding:8px 16px;font-size:12px;color:var(--tx3);background:var(--fmbg);font-family:'Inter',sans-serif;}
+
+/* FINAL CARD */
+.final-card{background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 60%,#0f172a 100%);border-radius:18px;padding:20px 22px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 8px 32px rgba(15,23,42,.4),0 0 0 1px rgba(255,255,255,.06);position:relative;overflow:hidden;}
+.final-card::before{content:'';position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(74,222,128,.14),transparent 70%);}
+.final-label{font-size:15px;color:#94a3b8;}
+.final-val{font-size:32px;font-weight:800;font-family:'Inter',sans-serif;letter-spacing:-.5px;transition:color .3s;}
+
+/* COPY */
+.copy-card{background:var(--card);border-radius:18px;margin-bottom:12px;overflow:hidden;box-shadow:var(--sh);}
+.copy-hdr{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--cpbg);border-bottom:1px solid var(--bdr);}
+.copy-title{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--tx2);}
+.copy-btn{display:flex;align-items:center;gap:6px;padding:7px 16px;background:linear-gradient(135deg,#1a1a2e,#0f3460);color:#fff;border:none;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 2px 8px rgba(15,52,96,.3);transition:transform .15s;}
+.copy-btn:active{transform:scale(.96);}
+.copy-area{padding:14px 16px;font-size:13px;line-height:2;color:var(--tx);white-space:pre-wrap;font-family:'Courier New',monospace;}
+
+/* HISTORY */
+.hist-search{width:100%;padding:11px 16px;border:1.5px solid var(--bdr);border-radius:14px;background:var(--card);color:var(--tx);font-size:16px;outline:none;margin-bottom:12px;transition:border-color .2s;box-shadow:var(--sh);}
+.hist-search:focus{border-color:#f59e0b;}
+.hist-empty{text-align:center;padding:40px 20px;color:var(--tx3);font-size:14px;}
+.hist-empty .ei{font-size:40px;margin-bottom:10px;}
+.month-summary{background:linear-gradient(135deg,#1e1b4b,#0f172a);border-radius:16px;padding:16px;margin-bottom:14px;color:#fff;}
+.ms-title{font-size:12px;color:#94a3b8;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;}
+.ms-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.ms-item{background:rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;backdrop-filter:blur(4px);}
+.ms-label{font-size:11px;color:#94a3b8;margin-bottom:3px;}
+.ms-val{font-size:15px;font-weight:700;color:#4ade80;font-family:'Inter',sans-serif;}
+.ms-val.red{color:#f87171;}
+.hi{background:var(--card);border-radius:14px;margin-bottom:10px;padding:14px 16px;box-shadow:var(--sh);transition:transform .15s,box-shadow .2s;}
+.hi:hover{transform:translateY(-1px);box-shadow:var(--sh-hover);}
+.hi-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.hi-date{font-size:13px;font-weight:600;color:var(--tx);}
+.hi-due{font-size:16px;font-weight:800;color:#4ade80;font-family:'Inter',sans-serif;}
+.hi-due.neg{color:#f87171;}
+.hi-row{display:flex;justify-content:space-between;font-size:12px;color:var(--tx3);margin-top:3px;flex-wrap:wrap;gap:4px;}
+.hi-acts{display:flex;gap:8px;margin-top:10px;}
+.hi-btn{flex:1;padding:8px;font-size:12px;font-weight:600;border:none;border-radius:9px;cursor:pointer;transition:opacity .15s;}
+.hi-btn:hover{opacity:.85;}
+.hi-btn.ld{background:linear-gradient(135deg,#1a1a2e,#0f3460);color:#fff;}
+.hi-btn.cp{background:linear-gradient(135deg,#c2440f,#9a3412);color:#fff;}
+.hi-btn.dl{background:#dc2626;color:#fff;flex:0;padding:8px 13px;}
+
+/* AUTO-FILL BADGE */
+.af-badge{display:inline-flex;align-items:center;gap:3px;background:linear-gradient(135deg,#d1fae5,#a7f3d0);color:#065f46;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:8px;cursor:pointer;transition:transform .15s;border:none;}
+.af-badge:hover{transform:scale(1.06);}
+[data-theme="dark"] .af-badge{background:linear-gradient(135deg,#064e3b,#065f46);color:#6ee7b7;}
+
+/* TOAST */
+.toast{position:fixed;bottom:82px;left:50%;transform:translateX(-50%) translateY(20px) scale(.9);background:linear-gradient(135deg,#1a1a2e,#0f3460);color:#4ade80;padding:10px 24px;border-radius:30px;font-size:14px;font-weight:600;opacity:0;transition:opacity .35s cubic-bezier(.34,1.56,.64,1),transform .35s cubic-bezier(.34,1.56,.64,1);pointer-events:none;z-index:999;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.35);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* BOTTOM BAR */
+.bbar{position:fixed;bottom:0;left:0;right:0;background:var(--bbg);border-top:1px solid var(--bbdr);padding:10px 16px;display:flex;gap:8px;z-index:100;transition:transform .3s ease;}
+.bbar.hidden{transform:translateY(100%);}
+.bbar-handle{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:101;background:var(--bbg);border:1px solid var(--bbdr);border-bottom:none;border-radius:12px 12px 0 0;padding:4px 20px 2px;cursor:pointer;transition:bottom .3s ease;}
+.bbar-handle.up{bottom:70px;}
+.bbar-handle-bar{width:36px;height:4px;background:var(--tx3);border-radius:2px;}
+.b-reset{flex:1;padding:13px;background:#f0f0f0;color:#555;border:none;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;}
+[data-theme="dark"] .b-reset{background:#252525;color:#aaa;}
+.b-save{flex:1;padding:13px;background:linear-gradient(135deg,#1d4ed8,#1e40af);color:#fff;border:none;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(29,78,216,.3);}
+.b-copy{flex:2;padding:13px;background:linear-gradient(135deg,#c2440f,#9a3412);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(194,68,15,.3);}
+
+@keyframes pop{0%{transform:scale(1.12);}100%{transform:scale(1);}}
+.pop{animation:pop .35s ease-out;}
+@keyframes btnBounce{0%{transform:scale(1);}30%{transform:scale(.92);}70%{transform:scale(1.05);}100%{transform:scale(1);}}
+.bounce{animation:btnBounce .25s ease;}
+/* SKELETON */
+@keyframes shimmer{0%{background-position:-200% 0;}100%{background-position:200% 0;}}
+.skeleton{background:linear-gradient(90deg,var(--bdr) 25%,var(--fmbg) 50%,var(--bdr) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:8px;}
+.sk-line{height:14px;margin:6px 0;border-radius:6px;}
+.sk-line.short{width:40%;}
+.sk-line.med{width:65%;}
+.sk-line.full{width:100%;}
+.sk-num{height:20px;width:30%;border-radius:6px;margin-left:auto;}
+/* PRIVATE MODE */
+.private-on .fd,.private-on .fi,.private-on .rv,.private-on .final-val,.private-on #copy_text,.private-on .hi-due,.private-on .ms-val,.private-on .hdr-due-val,.private-on .stat-val{filter:blur(6px);user-select:none;transition:filter .3s;}
+.private-on .fd:hover,.private-on .fi:hover,.private-on .rv:hover,.private-on .final-val:hover{filter:blur(0);}
+/* ACCENT COLOR */
+:root{--accent:#f59e0b;--accent2:#ef4444;}
+.tab.active{color:var(--accent)!important;border-bottom-color:var(--accent)!important;}
+.fi:focus{border-bottom-color:var(--accent)!important;}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link rel="manifest" href="data:application/json,{&quot;name&quot;:&quot;Daily Settlement&quot;,&quot;short_name&quot;:&quot;Settlement&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#0f172a&quot;,&quot;theme_color&quot;:&quot;#0f172a&quot;,&quot;icons&quot;:[{&quot;src&quot;:&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230f172a'/%3E%3Ctext y='70' x='50' text-anchor='middle' font-size='60'%3E📊%3C/text%3E%3C/svg%3E&quot;,&quot;sizes&quot;:&quot;192x192&quot;}]}"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Settlement">
+<meta name="theme-color" content="#0f172a">
+
+<style id="wow-redesign">
+
+/* ===== WOW REDESIGN ===== */
+
+body{
+  background:
+    radial-gradient(circle at top left, rgba(59,130,246,.12), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(168,85,247,.12), transparent 25%),
+    var(--bg) !important;
+}
+
+/* floating glass header */
+.hdr{
+  margin:10px;
+  border-radius:24px;
+  overflow:hidden;
+  backdrop-filter:blur(20px);
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+/* modern cards */
+.card,
+.copy-card,
+.month-summary,
+.hi{
+  border-radius:28px !important;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(16px);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.08),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.card:hover{
+  transform:translateY(-6px) scale(1.01);
+}
+
+/* luxury section header */
+.ch{
+  padding:14px 18px !important;
+  font-size:11px !important;
+  letter-spacing:.14em !important;
+  font-weight:800 !important;
+}
+
+/* inputs */
+.fi{
+  background:rgba(255,255,255,.06);
+  padding:10px 12px !important;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.fi:focus{
+  box-shadow:
+    0 0 0 4px rgba(59,130,246,.14),
+    0 10px 25px rgba(59,130,246,.12) !important;
+  transform:scale(1.015);
+}
+
+/* final due hero */
+.final-card{
+  border-radius:34px !important;
+  padding:28px !important;
+  background:
+    linear-gradient(135deg,#0f172a 0%,#1d4ed8 40%,#7c3aed 100%) !important;
+  box-shadow:
+    0 25px 50px rgba(29,78,216,.28),
+    0 0 30px rgba(124,58,237,.18);
+}
+
+.final-card::before{
+  content:'';
+  position:absolute;
+  width:220px;
+  height:220px;
+  background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);
+  right:-70px;
+  top:-70px;
+}
+
+.final-val{
+  font-size:42px !important;
+  text-shadow:0 0 22px rgba(255,255,255,.18);
+}
+
+/* buttons */
+button{
+  transition:all .22s ease !important;
+}
+
+.copy-btn,
+.b-save,
+.b-copy{
+  border-radius:18px !important;
+  background:linear-gradient(135deg,#2563eb,#7c3aed) !important;
+  box-shadow:
+    0 10px 25px rgba(37,99,235,.24),
+    inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+button:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.05);
+}
+
+/* floating theme dock */
+.theme-showcase{
+  position:fixed;
+  right:14px;
+  top:120px;
+  z-index:999;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.theme-pill{
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,.8);
+  box-shadow:0 4px 14px rgba(0,0,0,.2);
+  cursor:pointer;
+  transition:all .22s ease;
+}
+
+.theme-pill:hover{
+  transform:scale(1.2);
+}
+
+/* glass quote */
+#quote-card{
+  border-radius:26px !important;
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.06);
+}
+
+/* tabs */
+.tabs{
+  margin:0 10px;
+  border-radius:18px 18px 0 0;
+  overflow:hidden;
+}
+
+.tab{
+  font-size:13px !important;
+  font-weight:700 !important;
+}
+
+.tab.active{
+  background:rgba(255,255,255,.08);
+}
+
+/* animated glow */
+.hdr-logo{
+  animation:logoGlow 3s ease-in-out infinite;
+}
+
+@keyframes logoGlow{
+  0%,100%{
+    box-shadow:0 0 0 rgba(245,158,11,.2);
+  }
+  50%{
+    box-shadow:0 0 24px rgba(245,158,11,.45);
+  }
+}
+
+/* smooth */
+*{
+  scroll-behavior:smooth;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="theme-showcase">
+  <div class="theme-pill" style="background:linear-gradient(135deg,#1d4ed8,#7c3aed);" onclick="document.documentElement.setAttribute('data-theme','purple')"></div>
+  <div class="theme-pill" style="background:linear-gradient(135deg,#065f46,#10b981);" onclick="document.documentElement.setAttribute('data-theme','forest')"></div>
+  <div class="theme-pill" style="background:linear-gradient(135deg,#7f1d1d,#fb923c);" onclick="document.documentElement.setAttribute('data-theme','sunset')"></div>
+  <div class="theme-pill" style="background:linear-gradient(135deg,#020617,#0ea5e9);" onclick="document.documentElement.setAttribute('data-theme','galaxy')"></div>
+</div>
+
+
+<!-- SKELETON LOADER -->
+<div id="skeleton-loader" style="display:none;padding:14px;max-width:600px;margin:0 auto;">
+  <div style="background:var(--card);border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:var(--sh);">
+    <div class="skeleton sk-line med"></div>
+    <div style="display:flex;justify-content:space-between;margin-top:10px;">
+      <div class="skeleton sk-line" style="width:45%;height:12px;"></div>
+      <div class="skeleton sk-num"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:8px;">
+      <div class="skeleton sk-line" style="width:35%;height:12px;"></div>
+      <div class="skeleton sk-num"></div>
+    </div>
+  </div>
+  <div style="background:var(--card);border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:var(--sh);">
+    <div class="skeleton sk-line short"></div>
+    <div style="display:flex;justify-content:space-between;margin-top:10px;">
+      <div class="skeleton sk-line" style="width:40%;height:12px;"></div>
+      <div class="skeleton sk-num"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:8px;">
+      <div class="skeleton sk-line" style="width:55%;height:12px;"></div>
+      <div class="skeleton sk-num"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:8px;">
+      <div class="skeleton sk-line" style="width:30%;height:12px;"></div>
+      <div class="skeleton sk-num"></div>
+    </div>
+  </div>
+  <div style="background:linear-gradient(135deg,#0f172a,#1e1b4b);border-radius:18px;padding:20px;margin-bottom:12px;">
+    <div class="skeleton sk-line short" style="background:rgba(255,255,255,.1);"></div>
+    <div class="skeleton" style="height:36px;width:50%;margin-left:auto;margin-top:10px;background:rgba(255,255,255,.1);border-radius:10px;"></div>
+  </div>
+</div>
+
+<!-- SPLASH SCREEN -->
+<div id="splash" style="position:fixed;inset:0;background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 50%,#0f3460 100%);z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .5s ease;">
+  <div style="width:80px;height:80px;border-radius:22px;background:linear-gradient(135deg,#f59e0b,#ef4444);display:flex;align-items:center;justify-content:center;font-size:44px;box-shadow:0 8px 32px rgba(245,158,11,.4);">📊</div>
+  <div style="text-align:center;">
+    <div style="font-size:24px;font-weight:800;color:#fff;letter-spacing:-.5px;">Daily Settlement</div>
+    <div style="font-size:13px;color:#8899bb;margin-top:4px;">আপনার দৈনিক হিসাব</div>
+  </div>
+  <div style="margin-top:8px;display:flex;gap:6px;">
+    <div style="width:6px;height:6px;border-radius:50%;background:#f59e0b;animation:pulse 1.2s ease infinite;"></div>
+    <div style="width:6px;height:6px;border-radius:50%;background:#f59e0b;animation:pulse 1.2s ease .2s infinite;"></div>
+    <div style="width:6px;height:6px;border-radius:50%;background:#f59e0b;animation:pulse 1.2s ease .4s infinite;"></div>
+  </div>
+</div>
+
+<!-- PIN LOCK -->
+<div class="pin-overlay" id="pin-overlay" style="display:none;">
+  <div class="pin-box">
+    <div class="pin-title">🔐 Daily Settlement</div>
+    <div class="pin-sub" id="pin-sub">PIN দিয়ে প্রবেশ করুন</div>
+    <div class="pin-dots" id="pin-dots">
+      <div class="pin-dot" id="pd0"></div>
+      <div class="pin-dot" id="pd1"></div>
+      <div class="pin-dot" id="pd2"></div>
+      <div class="pin-dot" id="pd3"></div>
+    </div>
+    <div class="pin-err" id="pin-err"></div>
+    <div class="pin-pad">
+      <button class="pin-btn" onclick="pinPress('1')">1</button>
+      <button class="pin-btn" onclick="pinPress('2')">2</button>
+      <button class="pin-btn" onclick="pinPress('3')">3</button>
+      <button class="pin-btn" onclick="pinPress('4')">4</button>
+      <button class="pin-btn" onclick="pinPress('5')">5</button>
+      <button class="pin-btn" onclick="pinPress('6')">6</button>
+      <button class="pin-btn" onclick="pinPress('7')">7</button>
+      <button class="pin-btn" onclick="pinPress('8')">8</button>
+      <button class="pin-btn" onclick="pinPress('9')">9</button>
+      <button class="pin-btn" onclick="pinPress('del')" style="font-size:14px;">⌫</button>
+      <button class="pin-btn" onclick="pinPress('0')">0</button>
+      <button class="pin-btn" onclick="pinPress('ok')" style="background:rgba(245,158,11,.3);color:#f59e0b;">✓</button>
+    </div>
+    <div class="pin-setup-link" id="pin-setup-link" onclick="showPinSetup()"></div>
+  </div>
+</div>
+
+<div class="hdr">
+  <div class="hdr-top">
+    <div class="hdr-brand">
+      <div class="hdr-logo">📊</div>
+      <div>
+        <div class="hdr-title">Daily Settlement</div>
+        <div class="hdr-date" id="hdr-date">—</div>
+      </div>
+    </div>
+    <div class="hdr-right"><button onclick="togglePrivate()" title="Private Mode" style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.1);border:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;" id="prv-btn">👁️</button>
+      <button class="theme-btn" onclick="toggleTheme()" id="theme-btn">🌙</button>
+      <button class="theme-btn" onclick="openCalc()" title="Calculator" style="font-size:14px;">🧮</button>
+      <button class="theme-btn" onclick="openSettings()" title="Settings" style="font-size:14px;">⚙️</button>
+      <div class="hdr-due">
+        <div class="hdr-due-label">আজকের মোট</div>
+        <div class="hdr-due-val" id="hdr-final">+৳0</div>
+      </div>
+    </div>
+  </div>
+  <div class="hdr-stats">
+    <div class="stat"><div class="stat-val wh" id="hdr-sub">৳0</div><div class="stat-label">মোট জমা</div></div>
+    <div class="stat"><div class="stat-val red" id="hdr-usdt">৳0</div><div class="stat-label">মোট USDT</div></div>
+    <div class="stat"><div class="stat-val green" id="hdr-prev">৳0</div><div class="stat-label">Previous Due</div></div>
+  </div>
+  <div class="hdr-handle" onclick="toggleHdr()" title="Header collapse">
+    <div class="hdr-handle-bar"></div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('calc')">🧮 হিসাব</button>
+  <button class="tab" onclick="switchTab('history')">🕒 History</button>
+</div>
+<div style="display:flex;justify-content:center;background:var(--hbg);padding:3px 0 4px;cursor:pointer;border-bottom:1px solid var(--hbdr);" onclick="toggleHdr()" title="Header collapse">
+  <div style="width:36px;height:4px;background:rgba(255,255,255,.2);border-radius:2px;"></div>
+</div>
+
+<!-- CALC TAB -->
+<div class="tab-panel active" id="tab-calc">
+<div class="con">
+
+  <!-- MOTIVATIONAL QUOTE -->
+  <div id="quote-card" style="background:linear-gradient(135deg,#1e1b4b,#0f172a);border-radius:16px;padding:14px 18px;margin-bottom:12px;box-shadow:0 4px 16px rgba(15,23,42,.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div style="font-size:22px;" id="quote-emoji">💡</div>
+        <div id="quote-author" style="font-size:11px;color:#64748b;"></div>
+      </div>
+      <div style="text-align:right;">
+        <div id="live-clock" style="font-size:18px;font-weight:800;color:#f59e0b;font-family:monospace;letter-spacing:1px;"></div>
+        <div id="live-date" style="font-size:10px;color:#64748b;margin-top:1px;"></div>
+      </div>
+    </div>
+    <div id="quote-text" style="font-size:13px;color:#e2e8f0;line-height:1.6;font-style:italic;"></div>
+  </div>
+
+  <div class="card">
+    <div class="ch or">📅 তারিখ ও আগের বাকি</div>
+    <div class="field"><span class="fl">তারিখ</span><input type="date" id="date" onchange="calc()"/></div>
+    <div class="field">
+      <span class="fl">Previous Due <button class="af-badge" onclick="autoFillPrev()">⚡ Auto-fill</button></span>
+      <input class="fi" type="text" id="prev_due" placeholder="" autocomplete="off" inputmode="decimal" oninput="fmtSingle(this);calc()"/>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch bl">💰 Today Paid</div>
+
+    <!-- AGENT LEDGER -->
+    <div style="padding:10px 16px;border-bottom:1px solid var(--bdr);background:var(--fmbg);">
+      <div style="display:flex;gap:6px;margin-bottom:4px;align-items:center;">
+        <input type="text" id="ag-name" placeholder="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="fi" style="flex:2;min-width:0;text-align:left;font-size:16px;border:0.5px solid var(--bdr);border-radius:8px;padding:8px 10px;background:var(--card);" onkeydown="if(event.key==='Enter')addAgent('co')" oninput="cancelEdit()"/>
+        <button id="sign-toggle" onclick="toggleAmtSign()" style="width:40px;height:40px;flex-shrink:0;border:1.5px solid #16a34a;border-radius:8px;background:#f0fdf4;color:#16a34a;font-size:20px;font-weight:800;cursor:pointer;line-height:1;">+</button>
+        
+        <input type="text" id="ag-amt" placeholder="" autocomplete="off" autocorrect="off" spellcheck="false" class="fi" inputmode="decimal" oninput="previewAmt();if(!window._amtFromEdit)cancelEdit();window._amtFromEdit=false;" style="flex:1;min-width:70px;text-align:right;font-size:16px;border:0.5px solid var(--bdr);border-radius:8px;padding:8px 8px;background:var(--card);" onkeydown="if(event.key==='Enter')addAgent('co')"/>
+      </div>
+      <div id="ag-amt-preview" style="font-size:11px;color:#16a34a;text-align:right;padding-right:4px;height:14px;margin-bottom:6px;"></div>
+      <div style="display:flex;gap:6px;">
+        <button id="btn-co" onclick="addAgent('co')" style="flex:1;padding:8px;font-size:12px;font-weight:700;background:linear-gradient(135deg,#1d4ed8,#1e40af);color:#fff;border:none;border-radius:8px;cursor:pointer;">💸 Cash Out</button>
+        <button id="btn-bk" onclick="addAgent('bk')" style="flex:1;padding:8px;font-size:12px;font-weight:700;background:linear-gradient(135deg,#166534,#14532d);color:#fff;border:none;border-radius:8px;cursor:pointer;">🏦 Bank</button>
+        <button id="btn-b2b" onclick="addAgent('b2b')" style="flex:1;padding:8px;font-size:12px;font-weight:700;background:linear-gradient(135deg,#0f766e,#0d9488);color:#fff;border:none;border-radius:8px;cursor:pointer;">🏦 B2B Bank</button>
+        <button id="btn-nt" onclick="addAgent('nt')" style="flex:1;padding:8px;font-size:12px;font-weight:700;background:linear-gradient(135deg,#92400e,#78350f);color:#fff;border:none;border-radius:8px;cursor:pointer;">📝 Note</button>
+      </div>
+    </div>
+
+    <!-- FAVORITE AGENTS QUICK SELECT -->
+    <div id="fav-bar" style="display:none;padding:6px 16px;border-bottom:1px solid var(--bdr);background:var(--fmbg);flex-wrap:wrap;gap:6px;"></div>
+
+    <!-- AGENT LIST -->
+    <div id="agent-list" style="display:none;border-bottom:1px solid var(--bdr);">
+      <div style="padding:5px 16px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tx3);background:var(--fmbg);display:flex;justify-content:space-between;"><span>এজেন্ট</span><span>ক্যাটাগরি / Amount</span></div>
+      <div id="agent-rows"></div>
+
+    </div>
+
+    <!-- CASH OUT -->
+    <div class="field" style="flex-direction:column;align-items:stretch;gap:4px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span class="fl" style="font-size:12px;color:var(--tx2);">Cash Out</span>
+                  <div style="display:flex;gap:4px;align-items:center;">
+          
+<button onclick="scrollFieldEnd('number')" id="scroll-btn-number" style="display:none;font-size:11px;padding:2px 8px;background:#f0fdf4;color:#166534;border:none;border-radius:10px;cursor:pointer;font-weight:600;" title="শেষে যান">⏩</button>
+          <button onclick="toggleBreakdown('co')" id="co-expand-btn" style="display:none;font-size:11px;padding:2px 8px;background:#eff6ff;color:#1d4ed8;border:none;border-radius:10px;cursor:pointer;font-weight:600;">📋 দেখুন</button>
+        </div>
+      </div>
+      <input class="fi" type="text" id="number" placeholder="" autocomplete="off" inputmode="text" oninput="fmtExpr(this);calc();updateScrollBtn('number');showPreview('number','co-preview')" style="width:100%;text-align:left;font-size:15px;"/>
+      <div id="co-preview" style="display:none;font-size:11px;color:#1d4ed8;font-weight:600;margin-top:2px;padding:2px 4px;background:#eff6ff;border-radius:6px;transition:opacity .2s;"></div>
+    </div>
+    <div id="co-breakdown" style="display:none;padding:8px 16px;background:linear-gradient(90deg,#eff6ff,#f5f9ff);border-bottom:1px solid var(--bdr);">
+      <div id="co-breakdown-list" style="font-size:13px;color:#1d4ed8;line-height:2;"></div>
+    </div>
+    <div class="field" id="co-total-row" style="background:linear-gradient(90deg,#eff6ff,#f5f9ff);display:none;">
+      <span class="fl" style="font-size:13px;color:#1d4ed8;font-weight:600;">Cash Out Total</span>
+      <span class="fd" style="color:#1d4ed8;font-size:15px;" id="co_total_disp">0</span>
+    </div>
+
+    <!-- BANK -->
+    <div class="field" style="flex-direction:column;align-items:stretch;gap:4px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span class="fl" style="font-size:12px;color:var(--tx2);">Bank</span>
+                  <div style="display:flex;gap:4px;align-items:center;">
+          
+          <button onclick="scrollFieldEnd('bank')" id="scroll-btn-bank" style="display:none;font-size:11px;padding:2px 8px;background:#f0fdf4;color:#166534;border:none;border-radius:10px;cursor:pointer;font-weight:600;" title="শেষে যান">⏩</button>
+          <button onclick="toggleBreakdown('bk')" id="bk-expand-btn" style="display:none;font-size:11px;padding:2px 8px;background:#eff6ff;color:#1d4ed8;border:none;border-radius:10px;cursor:pointer;font-weight:600;">📋 দেখুন</button>
+        </div>
+      </div>
+      <input class="fi" type="text" id="bank" placeholder="" autocomplete="off" inputmode="text" oninput="fmtExpr(this);calc();updateScrollBtn('bank');showPreview('bank','bk-preview')" style="width:100%;text-align:left;font-size:15px;"/>
+      <div id="bk-preview" style="display:none;font-size:11px;color:#1d4ed8;font-weight:600;margin-top:2px;padding:2px 4px;background:#eff6ff;border-radius:6px;transition:opacity .2s;"></div>
+    </div>
+    <div id="bk-breakdown" style="display:none;padding:8px 16px;background:linear-gradient(90deg,#eff6ff,#f5f9ff);border-bottom:1px solid var(--bdr);">
+      <div id="bk-breakdown-list" style="font-size:13px;color:#1d4ed8;line-height:2;"></div>
+    </div>
+    <div class="field" id="bk-total-row" style="background:linear-gradient(90deg,#eff6ff,#f5f9ff);display:flex;">
+      <span class="fl" style="font-size:13px;color:#1d4ed8;font-weight:600;">Bank Total</span>
+      <span class="fd" style="color:#1d4ed8;font-size:15px;" id="bk_total_disp">0</span>
+    </div>
+
+    <!-- B2B BANK -->
+    <div class="field" style="flex-direction:column;align-items:stretch;gap:4px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span class="fl" style="font-size:12px;color:var(--tx2);">B2B Bank</span>
+        <div style="display:flex;gap:4px;align-items:center;">
+          <button onclick="scrollFieldEnd('b2b_bank')" id="scroll-btn-b2b_bank" style="display:none;font-size:11px;padding:2px 8px;background:#f0fdf4;color:#166534;border:none;border-radius:10px;cursor:pointer;font-weight:600;" title="শেষে যান">⏩</button>
+          <button onclick="toggleBreakdown('b2b')" id="b2b-expand-btn" style="display:none;font-size:11px;padding:2px 8px;background:#ccfbf1;color:#0f766e;border:none;border-radius:10px;cursor:pointer;font-weight:600;">📋 দেখুন</button>
+        </div>
+      </div>
+      <input class="fi" type="text" id="b2b_bank" placeholder="" autocomplete="off" inputmode="text" oninput="fmtExpr(this);calc();updateScrollBtn('b2b_bank');showPreview('b2b_bank','b2b-preview')" style="width:100%;text-align:left;font-size:15px;"/>
+      <div id="b2b-preview" style="display:none;font-size:11px;color:#0f766e;font-weight:600;margin-top:2px;padding:2px 4px;background:#ccfbf1;border-radius:6px;transition:opacity .2s;"></div>
+    </div>
+    <div id="b2b-breakdown" style="display:none;padding:8px 16px;background:linear-gradient(90deg,#ccfbf1,#f0fdfa);border-bottom:1px solid var(--bdr);">
+      <div id="b2b-breakdown-list" style="font-size:13px;color:#0f766e;line-height:2;"></div>
+    </div>
+    <div class="field" id="b2b-total-row" style="background:linear-gradient(90deg,#ccfbf1,#f0fdfa);display:none;">
+      <span class="fl" style="font-size:13px;color:#0f766e;font-weight:600;">B2B Bank Total</span>
+      <span class="fd" style="color:#0f766e;font-size:15px;" id="b2b_total_disp">0</span>
+    </div>
+
+    <div class="field" style="background:linear-gradient(90deg,#fffbf0,#fffdf7);">
+      <div style="flex:1;"><div class="fl" style="color:#b45309;font-weight:600;">Commission <span style="font-size:11px;color:#d97706;">(Cash Out এর 0.20%)</span></div></div>
+      <span class="fd" style="color:#b45309;" id="comm_disp">0</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch pu">🪙 USDT Settlement</div>
+    <div class="field" style="flex-direction:column;align-items:stretch;gap:4px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:12px;color:var(--tx2);">Amount</span>
+                <button onclick="scrollFieldEnd('usdt_expr')" id="scroll-btn-usdt_expr" style="display:none;font-size:11px;padding:2px 8px;background:#f0fdf4;color:#166534;border:none;border-radius:10px;cursor:pointer;font-weight:600;" title="শেষে যান">⏩</button>
+      </div>
+      <input class="fi" type="text" id="usdt_expr" placeholder="" autocomplete="off" inputmode="text" oninput="fmtExpr(this);calc();updateScrollBtn('usdt_expr')" style="width:100%;text-align:left;font-size:15px;"/>
+    </div>
+    <div class="field"><span class="fl">Rate (×) </span><input class="fi" type="text" id="usdt_rate" placeholder="" autocomplete="off" inputmode="decimal" inputmode="decimal" oninput="calc()"/></div>
+    <div id="usdt-breakdown" style="display:none;padding:8px 16px;background:linear-gradient(90deg,#faf5ff,#fdf9ff);border-bottom:1px solid var(--bdr);"><div id="usdt-breakdown-list"></div></div>
+    <div class="field" style="background:linear-gradient(90deg,#faf5ff,#fdf9ff);">
+      <div style="display:flex;align-items:center;gap:6px;"><button onclick="toggleBreakdown('usdt')" id="usdt-expand-btn" style="display:none;font-size:11px;padding:2px 8px;background:#faf5ff;color:#6b21a8;border:1px solid #e9d5ff;border-radius:10px;cursor:pointer;font-weight:600;">📋 দেখুন</button></div>
+      <span class="fl" style="color:#6b21a8;font-weight:700;">USDT Total</span>
+      <span class="fd" style="color:#6b21a8;" id="usdt_total_disp">0</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch gr">🟢 Nagad Exchange</div>
+    <div class="field" style="flex-direction:column;align-items:stretch;gap:4px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:12px;color:var(--tx2);">Amount</span>
+        <div style="display:flex;gap:4px;align-items:center;">
+          <button onclick="scrollFieldEnd('nagad_expr')" id="scroll-btn-nagad_expr" style="display:none;font-size:11px;padding:2px 8px;background:#f0fdf4;color:#166534;border:none;border-radius:10px;cursor:pointer;font-weight:600;" title="শেষে যান">⏩</button>
+          <button onclick="toggleBreakdown('nagad')" id="nagad-expand-btn" style="display:none;font-size:11px;padding:2px 8px;background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;border-radius:10px;cursor:pointer;font-weight:600;">📋 দেখুন</button>
+        </div>
+      </div>
+      <input class="fi" type="text" id="nagad_expr" placeholder="" autocomplete="off" inputmode="text" oninput="fmtExpr(this);calc();updateScrollBtn('nagad_expr')" style="width:100%;text-align:left;font-size:15px;"/>
+    </div>
+    <div id="nagad-breakdown" style="display:none;padding:8px 16px;background:linear-gradient(90deg,#f0fdf4,#f5fff7);border-bottom:1px solid var(--bdr);"><div id="nagad-breakdown-list"></div></div>
+    <div class="field" style="background:linear-gradient(90deg,#f0fdf4,#f5fff7);">
+      <span class="fl" style="color:#166534;font-weight:600;">Nagad Total</span>
+      <span class="fd" style="color:#166534;" id="nagad_total_disp">0</span>
+    </div>
+    <div class="field" style="background:linear-gradient(90deg,#f0fdf4,#f5fff7);">
+      <div style="flex:1;"><div class="fl" style="color:#15803d;font-weight:600;">Commission <span style="font-size:11px;color:#16a34a;">(0.05%)</span></div></div>
+      <span class="fd" style="color:#15803d;" id="nagad_comm_disp">0</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch gr" style="background:linear-gradient(90deg,#ecfdf5,#f0fff8);color:#065f46;">📲 Nagad B2B</div>
+    <div class="field" style="flex-direction:column;align-items:stretch;gap:4px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:12px;color:var(--tx2);">Amount</span>
+        <div style="display:flex;gap:4px;align-items:center;">
+          <button onclick="scrollFieldEnd('nagad_b2b_expr')" id="scroll-btn-nagad_b2b_expr" style="display:none;font-size:11px;padding:2px 8px;background:#f0fdf4;color:#166634;border:none;border-radius:10px;cursor:pointer;font-weight:600;" title="শেষে যান">⏩</button>
+          <button onclick="toggleBreakdown('nagad_b2b')" id="nagad_b2b-expand-btn" style="display:none;font-size:11px;padding:2px 8px;background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0;border-radius:10px;cursor:pointer;font-weight:600;">📋 দেখুন</button>
+        </div>
+      </div>
+      <input class="fi" type="text" id="nagad_b2b_expr" placeholder="" autocomplete="off" inputmode="text" oninput="fmtExpr(this);calc();updateScrollBtn('nagad_b2b_expr')" style="width:100%;text-align:left;font-size:15px;"/>
+    </div>
+    <div id="nagad_b2b-breakdown" style="display:none;padding:8px 16px;background:linear-gradient(90deg,#ecfdf5,#f0fff8);border-bottom:1px solid var(--bdr);"><div id="nagad_b2b-breakdown-list"></div></div>
+    <div class="field" style="background:linear-gradient(90deg,#ecfdf5,#f0fff8);">
+      <span class="fl" style="color:#065f46;font-weight:600;">Nagad B2B Total</span>
+      <span class="fd" style="color:#065f46;" id="nagad_b2b_total_disp">0</span>
+    </div>
+    <div class="field" style="background:linear-gradient(90deg,#ecfdf5,#f0fff8);">
+      <div style="flex:1;"><div class="fl" style="color:#047857;font-weight:600;">Commission <span style="font-size:11px;color:#059669;">(0.05%)</span></div></div>
+      <span class="fd" style="color:#047857;" id="nagad_b2b_comm_disp">0</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch gy">📊 Calculations</div>
+    <div class="rr"><span class="rl">Today Total (No Comm)</span><span class="rv" id="today_total">0</span></div>
+    <div class="rr"><span class="rl">Commission (0.20%)</span><span class="rv" id="comm_calc">0</span></div>
+    <div class="rr"><span class="rl">Subtotal (Inc. Comm)</span><span class="rv" id="subtotal">0</span></div>
+    <div class="rr"><span class="rl">USDT Settlement</span><span class="rv" id="usdt_total">0</span></div>
+    <div class="fmr" id="formula_row">Previous Due + Subtotal + Nagad Comm − USDT</div>
+  </div>
+
+  <div class="final-card">
+    <div class="final-label">🏆 Final Due</div>
+    <div class="final-val" id="final_due" style="color:#4ade80;">৳0</div>
+  </div>
+
+  <div class="copy-card">
+    <div class="copy-hdr">
+      <span class="copy-title">📋 Generated Text</span>
+      <button class="copy-btn" onclick="copyText()" style="font-size:12px;padding:5px 12px;">📋 Copy</button>
+    </div>
+    <div class="copy-area" id="copy_text">— উপরে data দিলে এখানে text আসবে —</div>
+  </div>
+
+</div>
+</div>
+
+<!-- HISTORY TAB -->
+<div class="tab-panel" id="tab-history">
+<div class="con">
+  <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+    <input class="hist-search" type="text" id="hist-search" placeholder="🔍 নাম, তারিখ বা amount..." oninput="renderHist()" style="flex:1;min-width:150px;margin-bottom:0;"/>
+    <input type="date" id="hist-from" onchange="renderHist()" style="border:1.5px solid var(--bdr);border-radius:10px;padding:8px 10px;background:var(--card);color:var(--tx);font-size:13px;outline:none;cursor:pointer;" title="From date"/>
+    <input type="date" id="hist-to" onchange="renderHist()" style="border:1.5px solid var(--bdr);border-radius:10px;padding:8px 10px;background:var(--card);color:var(--tx);font-size:13px;outline:none;cursor:pointer;" title="To date"/>
+    <button onclick="clearDateFilter()" style="padding:8px 12px;border:1.5px solid var(--bdr);border-radius:10px;background:var(--card);color:var(--tx2);font-size:12px;cursor:pointer;white-space:nowrap;">✕ Clear</button>
+  </div>
+  <div id="month-sum-con"></div>
+  <div id="hist-con">
+    <div class="hist-empty"><div class="ei">🕒</div><div>এখনো কোনো history নেই</div><div style="font-size:12px;margin-top:6px;color:#bbb;">হিসাব করে Save করুন</div></div>
+  </div>
+</div>
+</div>
+
+<!-- CALCULATOR MODAL -->
+<div id="calc-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:500;align-items:flex-end;justify-content:center;">
+  <div style="background:var(--card);border-radius:28px 28px 0 0;padding:20px 20px 40px;width:100%;max-width:600px;box-shadow:0 -8px 40px rgba(0,0,0,.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <span style="font-size:16px;font-weight:800;color:var(--tx);">🧮 Calculator</span>
+      <button onclick="closeCalc()" style="border:none;background:var(--fmbg);width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;color:var(--tx2);">×</button>
+    </div>
+    <!-- History -->
+    <div id="calc-history" style="max-height:60px;overflow-y:auto;margin-bottom:8px;display:flex;flex-direction:column-reverse;gap:2px;"></div>
+    <!-- Display -->
+    <div style="background:linear-gradient(135deg,#0f172a,#1e1b4b);border-radius:16px;padding:14px 18px;text-align:right;margin-bottom:14px;">
+      <div id="calc-expr" style="font-size:12px;color:#94a3b8;min-height:16px;letter-spacing:.5px;"></div>
+      <div id="calc-result" style="font-size:36px;font-weight:800;color:#f8fafc;font-family:monospace;letter-spacing:-1px;transition:transform .1s;">0</div>
+    </div>
+    <!-- Buttons -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+      <button onclick="calcPressV3('C')" style="padding:18px;border:none;border-radius:14px;font-size:16px;font-weight:700;background:#fef2f2;color:#dc2626;cursor:pointer;transition:transform .1s,background .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">C</button>
+      <button onclick="calcPressV3('⌫')" style="padding:18px;border:none;border-radius:14px;font-size:18px;font-weight:700;background:#fef2f2;color:#dc2626;cursor:pointer;transition:transform .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">⌫</button>
+      <button onclick="calcPressV3('%')" style="padding:18px;border:none;border-radius:14px;font-size:16px;font-weight:700;background:#f0fdf4;color:#166534;cursor:pointer;transition:transform .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">%</button>
+      <button onclick="calcPressV3('/')" style="padding:18px;border:none;border-radius:14px;font-size:20px;font-weight:700;background:#eff6ff;color:#1d4ed8;cursor:pointer;transition:transform .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">÷</button>
+      <button onclick="calcPressV3('7')" style="padding:18px;border:none;border-radius:14px;font-size:20px;font-weight:600;background:var(--fmbg);color:var(--tx);cursor:pointer;transition:transform .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">7</button><button onclick="calcPressV3('8')" style="padding:18px;border:none;border-radius:14px;font-size:20px;font-weight:600;background:var(--fmbg);color:var(--tx);cursor:pointer;transition:transform .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">8</button><button onclick="calcPressV3('9')" style="padding:18px;border:none;border-radius:14px;font-size:20px;font-weight:600;background:var(--fmbg);color:var(--tx);cursor:pointer;transition:transform .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">9</button><button onclick="calcPressV3('*')" style="padding:18px;border:none;border-radius:14px;font-size:20px;font-weight:700;background:#eff6ff;color:#1d4ed8;cursor:pointer;transition:transform .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">×</button><button onclick="calcPressV3('4')" style="padding:18px;border:none;border-radius:14px;font-size:20px;font-weight:600;background:var(--fmbg);color:var(--tx);cursor:pointer;transition:transform .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">4</button><button onclick="calcPressV3('5')" style="padding:18px;border:none;border-radius:14px;font-size:20px;font-weight:600;background:var(--fmbg);color:var(--tx);cursor:pointer;transition:transform .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">5</button><button onclick="calcPressV3('6')" style="padding:18px;border:none;border-radius:14px;font-size:20px;font-weight:600;background:var(--fmbg);color:var(--tx);cursor:pointer;transition:transform .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">6</button><button onclick="calcPressV3('-')" style="padding:18px;border:none;border-radius:14px;font-size:20px;font-weight:700;background:#eff6ff;color:#1d4ed8;cursor:pointer;transition:transform .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">-</button><button onclick="calcPressV3('1')" style="padding:18px;border:none;border-radius:14px;font-size:20px;font-weight:600;background:var(--fmbg);color:var(--tx);cursor:pointer;transition:transform .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">1</button><button onclick="calcPressV3('2')" style="padding:18px;border:none;border-radius:14px;font-size:20px;font-weight:600;background:var(--fmbg);color:var(--tx);cursor:pointer;transition:transform .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">2</button><button onclick="calcPressV3('3')" style="padding:18px;border:none;border-radius:14px;font-size:20px;font-weight:600;background:var(--fmbg);color:var(--tx);cursor:pointer;transition:transform .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">3</button><button onclick="calcPressV3('+')" style="padding:18px;border:none;border-radius:14px;font-size:20px;font-weight:700;background:#eff6ff;color:#1d4ed8;cursor:pointer;transition:transform .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">+</button>
+      <button onclick="calcPressV3('00')" style="padding:18px;border:none;border-radius:14px;font-size:18px;font-weight:600;background:var(--fmbg);color:var(--tx);cursor:pointer;transition:transform .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">00</button>
+      <button onclick="calcPressV3('0')" style="padding:18px;border:none;border-radius:14px;font-size:20px;font-weight:600;background:var(--fmbg);color:var(--tx);cursor:pointer;transition:transform .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">0</button>
+      <button onclick="calcPressV3('.')" style="padding:18px;border:none;border-radius:14px;font-size:20px;font-weight:600;background:var(--fmbg);color:var(--tx);cursor:pointer;transition:transform .1s;" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">.</button>
+      <button onclick="calcPressV3('=')" style="padding:18px;border:none;border-radius:14px;font-size:22px;font-weight:800;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;cursor:pointer;transition:transform .1s;box-shadow:0 4px 12px rgba(245,158,11,.3);" onmousedown="this.style.transform='scale(.93)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.93)'" ontouchend="this.style.transform='scale(1)'">=</button>
+    </div>
+    <button onclick="copyCalcResult()" style="width:100%;margin-top:12px;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#1d4ed8,#1e40af);color:#fff;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(29,78,216,.3);">📋 Result Copy করুন</button>
+  </div>
+</div>
+
+<!-- SETTINGS MODAL -->
+<div id="settings-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:500;align-items:flex-end;justify-content:center;">
+  <div style="background:var(--card);border-radius:24px 24px 0 0;padding:24px 20px 40px;width:100%;max-width:600px;max-height:85vh;overflow-y:auto;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <span style="font-size:17px;font-weight:800;color:var(--tx);">⚙️ Settings</span>
+      <button onclick="closeSettings()" style="border:none;background:none;font-size:22px;cursor:pointer;color:var(--tx2);">×</button>
+    </div>
+    <!-- PIN Section -->
+    <div style="background:var(--fmbg);border-radius:14px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:12px;">🔐 PIN Lock</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button onclick="showPinSetup()" style="flex:1;padding:10px;border:1.5px solid var(--bdr);border-radius:10px;background:var(--card);color:var(--tx);font-size:13px;font-weight:600;cursor:pointer;" id="pin-set-btn">PIN সেট করুন</button>
+        <button onclick="disablePin()" style="flex:1;padding:10px;border:1.5px solid #dc2626;border-radius:10px;background:transparent;color:#dc2626;font-size:13px;font-weight:600;cursor:pointer;" id="pin-dis-btn">PIN বন্ধ করুন</button>
+      </div>
+    </div>
+    <!-- Export/Import Section -->
+    <div style="background:var(--fmbg);border-radius:14px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:12px;">💾 Backup & Restore</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button onclick="exportHistory()" style="flex:1;padding:10px;border:none;border-radius:10px;background:linear-gradient(135deg,#1d4ed8,#1e40af);color:#fff;font-size:13px;font-weight:700;cursor:pointer;">📤 Export History</button>
+        <label style="flex:1;padding:10px;border:none;border-radius:10px;background:linear-gradient(135deg,#166534,#14532d);color:#fff;font-size:13px;font-weight:700;cursor:pointer;text-align:center;">
+          📥 Import History
+          <input type="file" accept=".json" onchange="importHistory(event)" style="display:none;"/>
+        </label>
+      </div>
+      <div style="font-size:11px;color:var(--tx3);margin-top:8px;">Export করলে সব history JSON file হিসেবে download হবে। Import করলে নতুন data যোগ হবে।</div>
+    </div>
+    <!-- Themes -->
+    <div style="background:var(--fmbg);border-radius:14px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:4px;">🎨 Theme</div>
+      <div style="font-size:11px;color:var(--tx3);margin-bottom:12px;">Light থেকে Dark — ১৩টি theme</div>
+      <div style="margin-bottom:8px;font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em;">☀️ Light Themes</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px;" id="theme-grid">
+        <button onclick="setTheme('light')" class="theme-opt" data-t="light" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;cursor:pointer;background:linear-gradient(135deg,#1a1a2e,#0f3460);color:#fff;font-size:11px;font-weight:600;">🌙 Default</button>
+        <button onclick="setTheme('rose')" class="theme-opt" data-t="rose" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;cursor:pointer;background:linear-gradient(135deg,#881337,#f43f5e);color:#fff;font-size:11px;font-weight:600;">🌹 Rose</button>
+        <button onclick="setTheme('teal')" class="theme-opt" data-t="teal" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;cursor:pointer;background:linear-gradient(135deg,#042f2e,#14b8a6);color:#fff;font-size:11px;font-weight:600;">🩵 Teal</button>
+        <button onclick="setTheme('ocean')" class="theme-opt" data-t="ocean" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;cursor:pointer;background:linear-gradient(135deg,#006994,#00bcd4);color:#fff;font-size:11px;font-weight:600;">🌊 Ocean</button>
+        <button onclick="setTheme('forest')" class="theme-opt" data-t="forest" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;cursor:pointer;background:linear-gradient(135deg,#1a3a1a,#2d6b2d);color:#fff;font-size:11px;font-weight:600;">🌿 Forest</button>
+        <button onclick="setTheme('sunset')" class="theme-opt" data-t="sunset" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;cursor:pointer;background:linear-gradient(135deg,#7b2d00,#e8722a);color:#fff;font-size:11px;font-weight:600;">🌅 Sunset</button>
+        <button onclick="setTheme('coffee')" class="theme-opt" data-t="coffee" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;cursor:pointer;background:linear-gradient(135deg,#1c0a00,#7c4a1e);color:#fef3c7;font-size:11px;font-weight:600;">☕ Coffee</button>
+        <button onclick="setTheme('slate')" class="theme-opt" data-t="slate" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;cursor:pointer;background:linear-gradient(135deg,#0f172a,#334155);color:#e2e8f0;font-size:11px;font-weight:600;">🩶 Slate</button>
+        <button onclick="setTheme('purple')" class="theme-opt" data-t="purple" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;cursor:pointer;background:linear-gradient(135deg,#2d0060,#9333ea);color:#fff;font-size:11px;font-weight:600;">💜 Purple</button>
+      </div>
+      <div style="margin-bottom:8px;font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em;">🌑 Dark Themes</div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:7px;">
+        <button onclick="setTheme('dark')" class="theme-opt" data-t="dark" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;cursor:pointer;background:linear-gradient(135deg,#0a0a14,#1a1a2e);color:#e2e8f0;font-size:11px;font-weight:600;">⚫ Dark</button>
+        <button onclick="setTheme('midnight')" class="theme-opt" data-t="midnight" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;cursor:pointer;background:linear-gradient(135deg,#050510,#0a0a20);color:#c4b5fd;font-size:11px;font-weight:600;">🌌 Midnight</button>
+        <button onclick="setTheme('galaxy')" class="theme-opt" data-t="galaxy" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;cursor:pointer;background:linear-gradient(135deg,#0a001f,#2d0060);color:#e9d5ff;font-size:11px;font-weight:600;">🔮 Galaxy</button>
+        <button onclick="setTheme('lava')" class="theme-opt" data-t="lava" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;cursor:pointer;background:linear-gradient(135deg,#1c0000,#dc2626);color:#fecaca;font-size:11px;font-weight:600;">🌋 Lava</button>
+        <button onclick="setTheme('aurora')" class="theme-opt" data-t="aurora" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;cursor:pointer;background:linear-gradient(135deg,#020c10,#065f46);color:#a7f3d0;font-size:11px;font-weight:600;grid-column:span 2;">🌠 Aurora</button>
+      </div>
+    </div>
+
+    <!-- Background Wallpaper -->
+    <div style="background:var(--fmbg);border-radius:14px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:4px;">🖼️ Background Wallpaper</div>
+      <div style="font-size:11px;color:var(--tx3);margin-bottom:12px;">Theme-এর উপর overlay হবে</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;">
+        <button onclick="setWallpaper('none')" class="wp-opt" data-w="none" style="padding:10px 4px;border-radius:10px;border:2px solid var(--accent,#f59e0b);background:var(--card);font-size:11px;color:var(--tx);cursor:pointer;">✖ None</button>
+        <button onclick="setWallpaper('dots')" class="wp-opt" data-w="dots" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;background:radial-gradient(circle,#aaa 1px,transparent 1px) center/14px 14px #1e293b;font-size:11px;color:#e2e8f0;cursor:pointer;">⚪ Dots</button>
+        <button onclick="setWallpaper('grid')" class="wp-opt" data-w="grid" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;background:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px) center/16px 16px,linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px) center/16px 16px #1e293b;font-size:11px;color:#e2e8f0;cursor:pointer;">⬛ Grid</button>
+        <button onclick="setWallpaper('circuit')" class="wp-opt" data-w="circuit" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;background:linear-gradient(135deg,#001a0a,#003d1a);font-size:11px;color:#00ff88;cursor:pointer;">🔌 Circuit</button>
+        <button onclick="setWallpaper('matrix')" class="wp-opt" data-w="matrix" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;background:#001a00;font-size:11px;color:#00ff41;cursor:pointer;">🟩 Matrix</button>
+        <button onclick="setWallpaper('stars')" class="wp-opt" data-w="stars" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;background:linear-gradient(135deg,#020010,#0a001f);font-size:11px;color:#e9d5ff;cursor:pointer;">✨ Stars</button>
+        <button onclick="setWallpaper('hexagon')" class="wp-opt" data-w="hexagon" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;background:linear-gradient(135deg,#0c1445,#1e293b);font-size:11px;color:#bae6fd;cursor:pointer;">🔷 Hex</button>
+        <button onclick="setWallpaper('waves')" class="wp-opt" data-w="waves" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;background:linear-gradient(135deg,#0c4a6e,#0369a1);font-size:11px;color:#bae6fd;cursor:pointer;">🌊 Waves</button>
+        <button onclick="setWallpaper('money')" class="wp-opt" data-w="money" style="padding:10px 4px;border-radius:10px;border:2px solid transparent;background:linear-gradient(135deg,#052e0a,#065f20);font-size:11px;color:#a7f3d0;cursor:pointer;">💵 Money</button>
+      </div>
+    </div>
+    <!-- Language Toggle -->
+    <div style="background:var(--fmbg);border-radius:14px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:12px;">🌐 ভাষা / Language</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <button onclick="setLang('bn')" id="lang-bn" style="padding:10px;border-radius:10px;border:2px solid var(--accent);background:var(--card);color:var(--tx);font-size:14px;font-weight:700;cursor:pointer;">🇧🇩 বাংলা</button>
+        <button onclick="setLang('en')" id="lang-en" style="padding:10px;border-radius:10px;border:2px solid transparent;background:var(--card);color:var(--tx);font-size:14px;font-weight:700;cursor:pointer;">🇬🇧 English</button>
+      </div>
+    </div>
+    <!-- Custom Accent Color -->
+    <div style="background:var(--fmbg);border-radius:14px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:12px;">🎨 Accent Color</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+        <button onclick="setAccent('#f59e0b')" style="width:32px;height:32px;border-radius:50%;background:#f59e0b;border:3px solid transparent;cursor:pointer;" class="accent-opt" data-c="#f59e0b" title="Amber"></button>
+        <button onclick="setAccent('#3b82f6')" style="width:32px;height:32px;border-radius:50%;background:#3b82f6;border:3px solid transparent;cursor:pointer;" class="accent-opt" data-c="#3b82f6" title="Blue"></button>
+        <button onclick="setAccent('#10b981')" style="width:32px;height:32px;border-radius:50%;background:#10b981;border:3px solid transparent;cursor:pointer;" class="accent-opt" data-c="#10b981" title="Green"></button>
+        <button onclick="setAccent('#f43f5e')" style="width:32px;height:32px;border-radius:50%;background:#f43f5e;border:3px solid transparent;cursor:pointer;" class="accent-opt" data-c="#f43f5e" title="Red"></button>
+        <button onclick="setAccent('#8b5cf6')" style="width:32px;height:32px;border-radius:50%;background:#8b5cf6;border:3px solid transparent;cursor:pointer;" class="accent-opt" data-c="#8b5cf6" title="Purple"></button>
+        <button onclick="setAccent('#06b6d4')" style="width:32px;height:32px;border-radius:50%;background:#06b6d4;border:3px solid transparent;cursor:pointer;" class="accent-opt" data-c="#06b6d4" title="Cyan"></button>
+        <button onclick="setAccent('#f97316')" style="width:32px;height:32px;border-radius:50%;background:#f97316;border:3px solid transparent;cursor:pointer;" class="accent-opt" data-c="#f97316" title="Orange"></button>
+        <div style="display:flex;align-items:center;gap:6px;margin-left:4px;">
+          <input type="color" id="custom-color-pick" value="#f59e0b" oninput="setAccent(this.value)" style="width:32px;height:32px;border:none;border-radius:50%;cursor:pointer;background:none;padding:0;" title="Custom color"/>
+          <span style="font-size:11px;color:var(--tx3);">Custom</span>
+        </div>
+      </div>
+    </div>
+    <!-- Private Mode -->
+    <div style="background:var(--fmbg);border-radius:14px;padding:16px;margin-bottom:14px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--tx);">🔒 Private Mode</div>
+          <div style="font-size:11px;color:var(--tx3);margin-top:3px;">সব amount blur হয়ে যাবে। History delete হবে না।</div>
+        </div>
+        <button onclick="togglePrivate()" id="private-toggle" style="width:52px;height:28px;border-radius:14px;border:none;background:#ddd;cursor:pointer;position:relative;transition:background .2s;">
+          <div id="private-knob" style="width:22px;height:22px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:left .2s;box-shadow:0 2px 4px rgba(0,0,0,.2);"></div>
+        </button>
+      </div>
+    </div>
+    <!-- Favorite Agents -->
+    <div style="background:var(--fmbg);border-radius:14px;padding:16px;">
+      <div style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:12px;">⭐ Favorite Agents</div>
+      <div style="display:flex;gap:8px;margin-bottom:10px;">
+        <input type="text" id="fav-input" placeholder="নাম লিখুন..." style="flex:1;padding:8px 12px;border:1.5px solid var(--bdr);border-radius:10px;background:var(--card);color:var(--tx);font-size:13px;outline:none;" onkeydown="if(event.key==='Enter')addFavorite()"/>
+        <button onclick="addFavorite()" style="padding:8px 16px;border:none;border-radius:10px;background:#f59e0b;color:#000;font-size:13px;font-weight:700;cursor:pointer;">+ Add</button>
+      </div>
+      <div id="fav-list"></div>
+    </div>
+  </div>
+</div>
+
+<div class="bbar-handle up" id="bbar-handle" onclick="toggleBbar()">
+  <div class="bbar-handle-bar"></div>
+</div>
+<div class="bbar">
+  <button class="b-reset" onclick="this.classList.remove('bounce');void this.offsetWidth;this.classList.add('bounce');resetAll()">🔄 Reset</button>
+  <button class="b-save" onclick="this.classList.remove('bounce');void this.offsetWidth;this.classList.add('bounce');saveHist()">💾 Save</button>
+  <button class="b-copy" onclick="copyText()" style="flex:1.5;">📋 Copy</button>
+  <button class="b-copy" onclick="shareAsImage()" style="flex:1;background:linear-gradient(135deg,#6b21a8,#9333ea);">🖼️ Image</button>
+</div>
+
+<div class="toast" id="toast">✅</div>
+
+<script>
+// ── CALCULATOR V3 WITH HISTORY ──
+var calcHistArr = [];
+function calcPressV3(v){
+  var res = document.getElementById('calc-result');
+  var expr = document.getElementById('calc-expr');
+  if(v==='C'){ calcExpr=''; }
+  else if(v==='⌫'){ calcExpr=calcExpr.slice(0,-1); }
+  else if(v==='='){
+    if(!calcExpr)return;
+    try{
+      var r=Function('"use strict";return ('+calcExpr.replace(/÷/g,'/').replace(/×/g,'*')+')')();
+      var rounded=Math.round(r*100)/100;
+      // Add to history
+      calcHistArr.unshift(calcExpr + ' = ' + rounded);
+      if(calcHistArr.length>10) calcHistArr.pop();
+      renderCalcHistory();
+      calcExpr=String(rounded);
+    }catch(e){ calcExpr='Error'; }
+  } else if(v==='%'){
+    try{
+      var r2=Function('"use strict";return ('+calcExpr+')')();
+      calcExpr=String(r2/100);
+    }catch(e){}
+  } else { calcExpr+=v; }
+  if(res){
+    try{
+      var live=Function('"use strict";return ('+calcExpr.replace(/÷/g,'/').replace(/×/g,'*')+')')();
+      res.textContent=isFinite(live)?fmtIN(Math.round(live*100)/100):calcExpr;
+    }catch(e){ res.textContent=calcExpr||'0'; }
+    res.style.transform='scale(1.03)';
+    setTimeout(function(){res.style.transform='scale(1)';},80);
+  }
+  if(expr) expr.textContent=calcExpr;
+}
+function renderCalcHistory(){
+  var hist=document.getElementById('calc-history');
+  if(!hist)return;
+  hist.innerHTML=calcHistArr.map(function(h){
+    return '<div style="font-size:11px;color:var(--tx3);text-align:right;padding:1px 4px;cursor:pointer;" onclick="calcExpr=\''+h.split(' = ')[1]+'\';calcPressV3(\'x\')">'+h+'</div>';
+  }).join('');
+}
+
+// ── AMOUNT PREVIEW ──
+function splitExprParts(str){
+  if(!str||!str.trim())return[];
+  var clean=str.replace(/,/g,'').replace(/−/g,'-').trim();
+  var parts=[];
+  var regex=/([+-]?\d+(?:\.\d+)?)/g;
+  var m;
+  while((m=regex.exec(clean))!==null){
+    var n=parseFloat(m[1]);
+    if(!isNaN(n)&&n!==0)parts.push(n);
+  }
+  return parts;
+}
+function showPreview(fieldId, previewId){
+  var el=document.getElementById(fieldId);
+  var pv=document.getElementById(previewId);
+  if(!el||!pv)return;
+  var vals=splitExprParts(el.value);
+  if(vals.length<2){pv.style.display='none';return;}
+  var total=vals.reduce(function(a,b){return a+b;},0);
+  pv.style.display='block';
+  pv.textContent='= ৳'+fmtIN(Math.round(Math.abs(total)))+' ('+vals.length+'টি)';
+}
+
+// ── BACKGROUND PATTERN ──
+var _matrixRaf=null;
+function setWallpaper(wp){
+  if(_matrixRaf){cancelAnimationFrame(_matrixRaf);_matrixRaf=null;}
+  var cv=document.getElementById('wp-canvas');if(cv)cv.remove();
+  var body=document.body;
+  body.style.backgroundImage='none';
+  body.style.backgroundSize='';
+  body.style.backgroundPosition='';
+  body.style.backgroundRepeat='';
+  localStorage.setItem('ds_wallpaper',wp);
+  var acc=localStorage.getItem('ds_accent')||'#f59e0b';
+  document.querySelectorAll('.wp-opt').forEach(function(b){
+    b.style.border=b.dataset.w===wp?'2px solid '+acc:'2px solid transparent';
+    if(b.dataset.w==='none')b.style.border=b.dataset.w===wp?'2px solid '+acc:'2px solid var(--bdr)';
+  });
+  if(wp==='none'){
+    // nothing
+  } else if(wp==='dots'){
+    body.style.backgroundImage='radial-gradient(circle,rgba(255,255,255,.18) 1px,transparent 1px)';
+    body.style.backgroundSize='20px 20px';
+  } else if(wp==='grid'){
+    body.style.backgroundImage='linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px)';
+    body.style.backgroundSize='24px 24px';
+  } else if(wp==='circuit'){
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" opacity="0.12"><path d="M10 50 L40 50 L40 10 L90 10" fill="none" stroke="#00ff88" stroke-width="1.5"/><path d="M50 90 L50 60 L90 60" fill="none" stroke="#00ff88" stroke-width="1.5"/><path d="M10 20 L30 20 L30 70 L60 70" fill="none" stroke="#00cc66" stroke-width="1"/><circle cx="40" cy="50" r="3" fill="#00ff88"/><circle cx="50" cy="60" r="3" fill="#00ff88"/><circle cx="30" cy="20" r="2" fill="#00cc66"/><rect x="85" y="6" width="8" height="8" fill="none" stroke="#00ff88" stroke-width="1"/><rect x="85" y="56" width="8" height="8" fill="none" stroke="#00ff88" stroke-width="1"/></svg>';
+    body.style.backgroundImage='url("data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg)+'")';
+    body.style.backgroundSize='100px 100px';
+    body.style.backgroundRepeat='repeat';
+  } else if(wp==='matrix'){
+    var canvas=document.createElement('canvas');
+    canvas.id='wp-canvas';
+    canvas.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:0.5;';
+    document.body.insertBefore(canvas,document.body.firstChild);
+    canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+    window.addEventListener('resize',function(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+    var ctx=canvas.getContext('2d');
+    var cols=Math.floor(canvas.width/16);
+    var drops=Array(cols).fill(1);
+    var chars='01৳+-BDUSDT'.split('');
+    function draw(){
+      ctx.fillStyle='rgba(0,0,0,0.06)';ctx.fillRect(0,0,canvas.width,canvas.height);
+      drops.forEach(function(y,i){
+        ctx.fillStyle=Math.random()>.92?'#fff':'#00ff41';
+        ctx.font='13px monospace';
+        ctx.fillText(chars[Math.floor(Math.random()*chars.length)],i*16,y*16);
+        if(y*16>canvas.height&&Math.random()>.975)drops[i]=0;
+        drops[i]++;
+      });
+      _matrixRaf=requestAnimationFrame(draw);
+    }
+    draw();
+  } else if(wp==='stars'){
+    var s='<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">';
+    var pts=[[20,15,1.5,.9],[60,40,1,.7],[110,10,2,.8],[160,35,1.2,.6],[40,80,1,.8],[90,65,1.8,.9],[145,70,1,.5],[175,20,1.5,.7],[10,130,1,.6],[70,120,2,.8],[130,110,1.2,.9],[180,90,1,.7],[30,170,1.5,.6],[100,160,1,.8],[155,150,1.8,.9],[185,170,1,.5]];
+    pts.forEach(function(p){s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+p[2]+'" fill="#fff" opacity="'+p[3]+'"/>';});
+    s+='</svg>';
+    body.style.backgroundImage='url("data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s)+'")';
+    body.style.backgroundSize='200px 200px';
+    body.style.backgroundRepeat='repeat';
+  } else if(wp==='hexagon'){
+    var h='<svg xmlns="http://www.w3.org/2000/svg" width="60" height="52" viewBox="0 0 60 52" opacity="0.1"><polygon points="30,2 58,17 58,47 30,62 2,47 2,17" fill="none" stroke="#60a5fa" stroke-width="1.5"/><polygon points="30,12 48,22 48,42 30,52 12,42 12,22" fill="none" stroke="#60a5fa" stroke-width="0.8"/></svg>';
+    body.style.backgroundImage='url("data:image/svg+xml;charset=utf-8,'+encodeURIComponent(h)+'")';
+    body.style.backgroundSize='60px 52px';
+    body.style.backgroundRepeat='repeat';
+  } else if(wp==='waves'){
+    var w='<svg xmlns="http://www.w3.org/2000/svg" width="200" height="60" viewBox="0 0 200 60" opacity="0.15"><path d="M0 30 Q25 10 50 30 Q75 50 100 30 Q125 10 150 30 Q175 50 200 30" fill="none" stroke="#38bdf8" stroke-width="2"/><path d="M0 45 Q25 25 50 45 Q75 65 100 45 Q125 25 150 45 Q175 65 200 45" fill="none" stroke="#0ea5e9" stroke-width="1.5"/><path d="M0 15 Q25 -5 50 15 Q75 35 100 15 Q125 -5 150 15 Q175 35 200 15" fill="none" stroke="#7dd3fc" stroke-width="1"/></svg>';
+    body.style.backgroundImage='url("data:image/svg+xml;charset=utf-8,'+encodeURIComponent(w)+'")';
+    body.style.backgroundSize='200px 60px';
+    body.style.backgroundRepeat='repeat';
+  } else if(wp==='money'){
+    var m='<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150" opacity="0.07"><text x="75" y="95" font-size="80" text-anchor="middle" fill="#4ade80" font-family="serif" font-weight="bold">&#2547;</text><ellipse cx="75" cy="75" rx="70" ry="70" fill="none" stroke="#4ade80" stroke-width="1.5"/><ellipse cx="75" cy="75" rx="55" ry="55" fill="none" stroke="#4ade80" stroke-width="0.8"/></svg>';
+    body.style.backgroundImage='url("data:image/svg+xml;charset=utf-8,'+encodeURIComponent(m)+'")';
+    body.style.backgroundSize='150px 150px';
+    body.style.backgroundRepeat='repeat';
+  }
+}
+function setBgPattern(p){setWallpaper(p==='none'?'none':p==='dots'?'dots':p==='grid'?'grid':'none');}
+(function(){
+  var saved=localStorage.getItem('ds_wallpaper')||localStorage.getItem('ds_bg_pattern')||'none';
+  setWallpaper(saved);
+})();
+
+// ── CONFETTI ON SAVE ──
+function fireConfetti(){
+  var colors=['#f59e0b','#4ade80','#60a5fa','#f472b6','#a78bfa','#fb923c'];
+  for(var i=0;i<60;i++){
+    (function(){
+      var el=document.createElement('div');
+      var color=colors[Math.floor(Math.random()*colors.length)];
+      var size=Math.random()*8+4;
+      el.style.cssText='position:fixed;z-index:9999;pointer-events:none;width:'+size+'px;height:'+size+'px;background:'+color+';border-radius:'+(Math.random()>0.5?'50%':'2px')+';left:'+(Math.random()*100)+'vw;top:-10px;opacity:1;transition:none;';
+      document.body.appendChild(el);
+      var tx=(Math.random()-0.5)*200;
+      var dur=1500+Math.random()*1000;
+      requestAnimationFrame(function(){
+        el.style.transition='transform '+dur+'ms cubic-bezier(.25,.46,.45,.94),opacity '+dur+'ms';
+        el.style.transform='translateY(100vh) translateX('+tx+'px) rotate('+(Math.random()*720)+'deg)';
+        el.style.opacity='0';
+      });
+      setTimeout(function(){el.remove();},dur+100);
+    })();
+  }
+}
+
+
+
+// ── INLINE EDIT/DELETE (event delegation) ──
+function getFieldRaw(fieldId){
+  var el=document.getElementById(fieldId);
+  if(!el||!el.value.trim())return[];
+  return splitExprParts(el.value);
+}
+function setFieldRaw(fieldId,arr){
+  var el=document.getElementById(fieldId);
+  if(!el)return;
+  if(arr.length===0){el.value='';fmtExpr(el);calc();updateScrollBtn(fieldId);return;}
+  el.value=arr.map(function(v,i){return i===0?fmtIN(v):'+'+fmtIN(v);}).join('');
+  fmtExpr(el);calc();updateScrollBtn(fieldId);
+}
+
+function renderBdBtns(field,i,editBg,editColor){
+  return '<button onclick="bdEdit(\x27'+field+'\x27,'+i+')" style="width:26px;height:26px;border:none;border-radius:6px;background:'+editBg+';color:'+editColor+';font-size:13px;cursor:pointer;">✏️</button>'+
+         '<button onclick="bdDelete(\x27'+field+'\x27,'+i+')" style="width:26px;height:26px;border:none;border-radius:6px;background:#fee2e2;color:#dc2626;font-size:13px;cursor:pointer;">🗑</button>';
+}
+function renderBdRows(field,vals,textColor,borderColor,editBg){
+  return vals.map(function(v,i){
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid '+borderColor+';">'+
+      '<span data-bd-field="'+field+'" data-bd-idx="'+i+'" style="font-size:13px;color:'+textColor+';">'+(i+1)+'. ৳'+fmt(v)+'</span>'+
+      '<div style="display:flex;gap:4px;">'+renderBdBtns(field,i,editBg,textColor)+'</div>'+
+    '</div>';
+  }).join('');
+}
+
+function bdDelete(field,idx){
+  var arr=getFieldRaw(field);
+  arr.splice(idx,1);
+  setFieldRaw(field,arr);
+}
+function bdEdit(field,idx){
+  // Find the span showing the amount in the breakdown row
+  var rows=document.querySelectorAll('[data-bd-field="'+field+'"][data-bd-idx="'+idx+'"]');
+  var span=rows[0];
+  if(!span)return;
+  var arr=getFieldRaw(field);
+  var oldVal=arr[idx];
+  // Replace span with input
+  var inp=document.createElement('input');
+  inp.type='text';
+  inp.inputMode='decimal';
+  inp.value=fmtIN(oldVal);
+  inp.style.cssText='width:100px;font-size:14px;font-weight:600;border:none;border-bottom:2px solid #f59e0b;outline:none;background:transparent;color:var(--tx,#0f172a);padding:2px 4px;';
+  span.replaceWith(inp);
+  inp.focus();
+  inp.select();
+  function confirm(){
+    var n=parseFloat(inp.value.replace(/,/g,''))||0;
+    if(n>0){arr[idx]=n;setFieldRaw(field,arr);}
+    else{setFieldRaw(field,arr);}// re-render without change
+  }
+  inp.addEventListener('blur',confirm);
+  inp.addEventListener('keydown',function(e){
+    if(e.key==='Enter'){inp.blur();}
+    if(e.key==='Escape'){inp.value=fmtIN(oldVal);inp.blur();}
+  });
+}
+
+// ── AGENT LEDGER ──
+let agents=[];
+window._editId=null;
+
+function addAgent(type){
+  const nameEl=document.getElementById('ag-name');
+  const amtEl=document.getElementById('ag-amt');
+  const name=nameEl.value.trim();
+  const amtRawStr=amtEl.value.trim();
+  const rawAmt=parseExpr(amtRawStr||'0');
+  if(!name){showToast('⚠️ নাম লিখুন');nameEl.focus();return;}
+  if(!rawAmt){showToast('⚠️ Amount লিখুন');amtEl.focus();return;}
+  if(window._editId){
+    // Update existing entry
+    const idx=agents.findIndex(a=>a.id===window._editId);
+    if(idx>=0) agents[idx]={id:window._editId,name,amt:rawAmt,rawExpr:amtRawStr,type};
+    window._editId=null;
+    document.querySelectorAll('[id^="ag-row-"]').forEach(r=>r.style.background='');
+  } else {
+    agents.push({id:Date.now(),name,amt:rawAmt,rawExpr:amtRawStr,type});
+    // Append to field directly — don't overwrite existing values
+    if(type==='co') addToField('number', rawAmt);
+    else if(type==='bk') addToField('bank', rawAmt);
+    else if(type==='b2b') addToField('b2b_bank', rawAmt);
+  }
+  amtEl.value='';
+  const prev=document.getElementById('ag-amt-preview');
+  if(prev)prev.textContent='';
+  const stBtn=document.getElementById('sign-toggle');
+  if(stBtn){stBtn.textContent='+';stBtn.style.borderColor='#16a34a';stBtn.style.background='#f0fdf4';stBtn.style.color='#16a34a';}
+  amtEl.focus();
+  renderAgents();
+  calc();
+}
+
+function delAgent(id){
+  agents=agents.filter(a=>a.id!==id);
+  renderAgents();syncAgents();calc();
+}
+
+function delGroup(name){
+  agents=agents.filter(a=>a.name!==name);
+  renderAgents();syncAgents();calc();
+}
+
+function cancelEdit(){
+  if(window._editId){
+    window._editId=null;
+    document.querySelectorAll('[id^="ag-row-"]').forEach(r=>r.style.background='');
+  }
+}
+
+function toggleAmtSign(){
+  const btn=document.getElementById('sign-toggle');
+  const inp=document.getElementById('ag-amt');
+  if(!btn||!inp)return;
+  const isPlus=btn.textContent==='+';
+  if(isPlus){
+    btn.textContent='−';
+    btn.style.borderColor='#dc2626';
+    btn.style.background='#fef2f2';
+    btn.style.color='#dc2626';
+    // Add minus to value if not already there
+    const v=inp.value.replace(/^-/,'');
+    if(v)inp.value='-'+v;
+  } else {
+    btn.textContent='+';
+    btn.style.borderColor='#16a34a';
+    btn.style.background='#f0fdf4';
+    btn.style.color='#16a34a';
+    inp.value=inp.value.replace(/^-/,'');
+  }
+  previewAmt();
+}
+
+function previewAmt(){
+  const el=document.getElementById('ag-amt');
+  const prev=document.getElementById('ag-amt-preview');
+  if(!el||!prev)return;
+  const v=el.value.trim();
+  if(!v){prev.textContent='';return;}
+  const result=parseExpr(v);
+  if(result!==0){
+    prev.textContent='= '+fmt(result);
+    prev.style.color=result>=0?'#16a34a':'#dc2626';
+  } else {
+    prev.textContent='';
+  }
+}
+
+function editAgent(id){
+  const a=agents.find(x=>x.id===id);if(!a)return;
+  window._editId=id;
+  window._amtFromEdit=true;
+  document.getElementById('ag-name').value=a.name;
+  document.getElementById('ag-amt').value=(a.amt<0?'-':'')+fmt(Math.abs(a.amt));
+  document.querySelectorAll('[id^="ag-row-"]').forEach(r=>r.style.background='');
+  const row=document.getElementById('ag-row-'+id);
+  if(row)row.style.background='#fffbf0';
+  document.getElementById('ag-amt').focus();
+  showToast('✏️ ঠিক করে Cash Out বা Bank চাপুন');
+}
+
+
+function saveInlineEdit(id){
+  const inp=document.getElementById('ie-input-'+id);
+  if(!inp)return;
+  const parsed=parseExpr(inp.value);
+  const a=agents.find(x=>x.id===id);
+  if(!a)return;
+  a.amt=parsed;
+  renderAgents();
+  syncAgents();
+  calc();
+  showToast('✅ Updated: '+fmt(parsed));
+}
+
+function editGroupName(oldName){
+  const nameEl=document.getElementById('ag-name');
+  // Show inline name editor in the agent input area
+  const inp=document.createElement('input');
+  inp.value=oldName;
+  inp.style.cssText='position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999;font-size:15px;padding:10px 16px;border:2px solid #f59e0b;border-radius:12px;outline:none;background:var(--card,#fff);color:#1a1a1a;width:260px;box-shadow:0 8px 32px rgba(0,0,0,.2);';
+  const overlay=document.createElement('div');
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:998;';
+  const hint=document.createElement('div');
+  hint.textContent='নতুন নাম লিখুন — Enter চাপুন';
+  hint.style.cssText='position:fixed;top:calc(50% + 44px);left:50%;transform:translateX(-50%);z-index:999;font-size:12px;color:#fff;background:rgba(0,0,0,.6);padding:4px 12px;border-radius:20px;';
+  document.body.appendChild(overlay);
+  document.body.appendChild(inp);
+  document.body.appendChild(hint);
+  inp.focus();inp.select();
+  function done(){
+    const newName=inp.value.trim();
+    if(newName&&newName!==oldName){
+      agents.forEach(a=>{if(a.name===oldName)a.name=newName;});
+      renderAgents();showToast('✅ নাম পরিবর্তন হয়েছে');
+    }
+    overlay.remove();inp.remove();hint.remove();
+  }
+  inp.addEventListener('keydown',function(e){
+    if(e.key==='Enter')done();
+    if(e.key==='Escape'){overlay.remove();inp.remove();hint.remove();}
+  });
+  overlay.onclick=done;
+}
+
+function quickAdd(el){
+  const name=el.dataset.name||el;
+  const nameEl=document.getElementById('ag-name');
+  const amtEl=document.getElementById('ag-amt');
+  nameEl.value=name;
+  amtEl.value='';
+  const prev=document.getElementById('ag-amt-preview');
+  if(prev)prev.textContent='';
+  window._editId=null;
+  amtEl.focus();
+  showToast('✏️ '+name+' — amount লিখুন');
+}
+
+function renderAgents(){
+  const listEl=document.getElementById('agent-list');
+  const rowsEl=document.getElementById('agent-rows');
+  if(!agents.length){listEl.style.display='none';return;}
+  listEl.style.display='block';
+
+  // Group by name
+  const groups={};
+  const groupOrder=[];
+  agents.forEach(a=>{
+    if(!groups[a.name]){groups[a.name]=[];groupOrder.push(a.name);}
+    groups[a.name].push(a);
+  });
+
+  let html='';
+  groupOrder.forEach((name,gi)=>{
+    const entries=groups[name];
+    const total=entries.reduce((s,a)=>s+a.amt,0);
+    const multi=entries.length>1;
+    const gid='grp'+gi;
+    const types=[...new Set(entries.map(a=>a.type))];
+    const typeLabel=types.map(t=>t==='co'?'Cash Out':t==='bk'?'Bank':t==='b2b'?'B2B Bank':'Note').join('+');
+    const typeColor=types.length===1
+      ?(types[0]==='co'?'background:#eff6ff;color:#1d4ed8;'
+        :types[0]==='bk'?'background:#f0fdf4;color:#166534;'
+        :types[0]==='b2b'?'background:#ccfbf1;color:#0f766e;'
+        :'background:#fef3c7;color:#92400e;')
+      :'background:#faf5ff;color:#6b21a8;';
+
+    // encode name safely for data attribute
+    const safeName=name.replace(/"/g,'&quot;');
+
+    html+='<div style="border-bottom:0.5px solid var(--bdr);">';
+    html+='<div style="display:flex;align-items:center;padding:8px 16px;gap:6px;">';
+    html+='<span style="font-size:11px;color:var(--tx3);min-width:16px;">'+(gi+1)+'.</span>';
+    html+='<span style="flex:1;font-size:13px;font-weight:600;color:var(--tx);display:flex;align-items:center;gap:4px;">'+name+'<button onclick="editGroupName(\''+name.replace(/\'/g,"\\'")+'\')" style="border:none;background:none;color:#aaa;font-size:12px;cursor:pointer;padding:0 2px;line-height:1;" title="নাম edit করুন">✏️</button></span>';
+    html+='<span style="font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;'+typeColor+'">'+typeLabel+'</span>';
+    html+='<span style="font-size:13px;font-weight:700;font-family:monospace;min-width:70px;text-align:right;color:'+(total>=0?'#16a34a':'#dc2626')+';">'+(total>=0?'+':'')+fmt(total)+'</span>';
+    html+='<button data-name="'+safeName+'" onclick="quickAdd(this)" style="border:none;background:#e0f2fe;color:#0369a1;font-size:11px;padding:2px 8px;border-radius:8px;cursor:pointer;font-weight:700;">+ Add</button>';
+    if(multi){
+      html+='<button id="'+gid+'-btn" onclick="toggleGroup(&quot;'+gid+'&quot;)" style="border:none;background:#f0f0f0;color:#555;font-size:10px;padding:2px 7px;border-radius:8px;cursor:pointer;">দেখুন</button>';
+      html+='<button onclick="delGroup(&quot;'+name+'&quot;)" style="border:none;background:none;color:#dc2626;font-size:18px;cursor:pointer;padding:0 3px;line-height:1;">×</button>';
+    } else {
+      html+='<button onclick="delAgent('+entries[0].id+')" style="border:none;background:none;color:#dc2626;font-size:18px;cursor:pointer;padding:0 3px;line-height:1;">×</button>';
+    }
+    html+='</div>';
+
+    if(multi){
+      html+='<div id="'+gid+'" style="display:none;background:var(--fmbg);padding:0 8px 4px 32px;">';
+      entries.forEach(function(a){
+        const em=a.type==='co'?'💸':a.type==='bk'?'🏦':a.type==='b2b'?'🏦B2B':'📝';
+        html+='<div id="ie-'+a.id+'" style="display:flex;align-items:center;padding:5px 8px;gap:6px;border-top:0.5px solid var(--bdr);">';
+        const dispExpr=a.rawExpr&&a.rawExpr.includes('*')?(a.amt>=0?'+':'')+a.rawExpr+' = '+(a.amt>=0?'+':'')+fmt(a.amt):(a.amt>=0?'+':'')+fmt(a.amt);
+        html+='<span style="flex:1;font-size:12px;color:var(--tx2);">'+em+' '+fmt(Math.abs(a.amt))+'</span>';
+        html+='<span style="font-size:12px;font-weight:700;font-family:monospace;color:'+(a.amt>=0?'#16a34a':'#dc2626')+';">'+dispExpr+'</span>';
+        html+='<button onclick="inlineEdit('+a.id+')" style="border:none;background:none;color:#f59e0b;font-size:14px;cursor:pointer;padding:0 3px;">✏️</button>';
+        html+='<button onclick="delAgent('+a.id+')" style="border:none;background:none;color:#dc2626;font-size:16px;cursor:pointer;padding:0 3px;line-height:1;">×</button>';
+        html+='</div>';
+      });
+      html+='</div>';
+    }
+    html+='</div>';
+  });
+  rowsEl.innerHTML=html;
+}
+
+function toggleGroup(gid){
+  const el=document.getElementById(gid);
+  const btn=document.getElementById(gid+'-btn');
+  if(!el)return;
+  const open=el.style.display==='none';
+  el.style.display=open?'block':'none';
+  btn.textContent=open?'বন্ধ':'দেখুন';
+}
+
+// Track which amounts were manually typed (not from agents)
+var _manualCo = '';
+var _manualBk = '';
+
+
+// ── TRACK MANUAL INPUT ──
+function trackManual(fieldId){
+  var el=document.getElementById(fieldId);
+  if(!el)return;
+  // Get all agent amounts for this field
+  var type=fieldId==='number'?'co':'bk';
+  var agentAmts=agents.filter(function(a){return a.type===type;}).map(function(a){return a.amt;});
+  // All values in field
+  var allVals=splitExprParts(el.value);
+  // Manual = values not matching any agent amount
+  var remaining=[].concat(allVals);
+  agentAmts.forEach(function(amt){
+    var idx=remaining.indexOf(amt);
+    if(idx>=0) remaining.splice(idx,1);
+  });
+  if(fieldId==='number') _manualCo=remaining.length?remaining.join('+'):'';
+  else _manualBk=remaining.length?remaining.join('+'):'';
+}
+
+function syncAgents(){
+  // syncAgents is now only called on DELETE/EDIT of agent
+  // On ADD, we directly append to field (see addToField)
+  // On DELETE/EDIT, rebuild field from agents only (manual amounts lost — by design on edit)
+  var coAgents=agents.filter(function(a){return a.type==='co';});
+  var bkAgents=agents.filter(function(a){return a.type==='bk';});
+  var b2bAgents=agents.filter(function(a){return a.type==='b2b';});
+
+  var elCo=document.getElementById('number');
+  if(coAgents.length){
+    elCo.value=coAgents.map(function(a){return String(a.amt);}).join('+');
+    fmtExpr(elCo);
+  } else {
+    elCo.value=''; fmtExpr(elCo);
+  }
+
+  var elBk=document.getElementById('bank');
+  if(bkAgents.length){
+    elBk.value=bkAgents.map(function(a){return String(a.amt);}).join('+');
+    fmtExpr(elBk);
+  } else {
+    elBk.value=''; fmtExpr(elBk);
+  }
+
+  var elB2b=document.getElementById('b2b_bank');
+  if(b2bAgents.length){
+    elB2b.value=b2bAgents.map(function(a){return String(a.amt);}).join('+');
+    fmtExpr(elB2b);
+  } else {
+    elB2b.value=''; fmtExpr(elB2b);
+  }
+
+  updateScrollBtn('number');
+  updateScrollBtn('bank');
+  updateScrollBtn('b2b_bank');
+  calc();
+}
+
+function addToField(fieldId, amt){
+  var el=document.getElementById(fieldId);
+  if(!el)return;
+  var cur=el.value.trim();
+  // amt can be negative — use minus sign directly
+  if(amt<0){
+    el.value = cur ? cur+String(amt) : String(amt);
+  } else {
+    el.value = cur ? cur+'+'+String(amt) : String(amt);
+  }
+  fmtExpr(el);
+  updateScrollBtn(fieldId);
+}
+
+
+
+function nf(id){return parseFloat((document.getElementById(id).value||'').replace(/,/g,''))||0;}
+function fmtIN(n){
+  n=Math.round(Math.abs(n));
+  var s=String(n);
+  if(s.length<=3)return s;
+  var last3=s.slice(-3);
+  var rest=s.slice(0,-3);
+  return rest.replace(/(\d)(?=(\d{2})+$)/g,'$1,')+','+last3;
+}
+function fmt(v){var n=Math.round(v);return (n<0?'-':'')+fmtIN(Math.abs(n));}
+function fmtBn(v){return '৳'+fmt(v);}
+function parseExpr(e){
+  if(!e||e.trim()===''||e.trim()==='0')return 0;
+  try{
+    // Normalize minus variants, strip non-ASCII
+    var cleaned=e.replace(/\u2212/g,'-').replace(/[^\x00-\x7F]/g,'').trim();
+    // Remove commas only between digits (preserve operators)
+    for(var i=0;i<4;i++) cleaned=cleaned.replace(/(\d),(\d)/g,'$1$2');
+    if(!cleaned||!/^[0-9+\-*/().\s]+$/.test(cleaned))return 0;
+    const result=Function('"use strict";return ('+cleaned+')')();
+    return isFinite(result)?Math.round(result):0;
+  }catch(err){return 0;}
+}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+
+// Toggle breakdown panel
+function toggleBreakdown(id){
+  const el=document.getElementById(id+'-breakdown');
+  const btn=document.getElementById(id+'-expand-btn');
+  const open=el.style.display==='none'||!el.style.display;
+  el.style.display=open?'block':'none';
+  btn.textContent=open?'✕ বন্ধ':'📋 দেখুন';
+}
+// Comma format for single-number inputs
+function fmtSingle(el){
+  const v=el.value.replace(/,/g,'');
+  const n=parseInt(v);
+  if(!isNaN(n)&&v===String(n))el.value=n.toLocaleString('en-IN');
+}
+// Comma format for expression inputs (supports 50000+200000-30000)
+function fmtExpr(el){
+  const raw=el.value;
+  // Strip non-ASCII chars, keep operators + - * / ( ) . digits spaces
+  const clean=raw.replace(/[^\x20-\x7E]/g,'').replace(/,/g,'');
+  // Only format numbers that are NOT part of a * expression (to avoid breaking 1000*126.7)
+  // Split by + and - keeping sign, format each segment individually
+  // But if it contains * or /, leave those segments unformatted (just remove commas)
+  // Strategy: format digit-groups only when not adjacent to * or /
+  el.value=clean.replace(/(\d+(?:\.\d+)?)/g, function(m, num, offset, str){
+    // Check if this number is part of a multiplication/division expression
+    const before=str.slice(0,offset);
+    const after=str.slice(offset+m.length);
+    const adjMul=/[*/]\s*$/.test(before)||/^\s*[*/]/.test(after);
+    if(adjMul) return m; // keep as-is for multiplication context
+    if(m.includes('.')) return m; // decimal — don't reformat
+    return fmtIN(parseInt(m,10));
+  });
+}
+
+// Theme
+function toggleTheme(){
+  const h=document.documentElement,d=h.getAttribute('data-theme')==='dark';
+  h.setAttribute('data-theme',d?'light':'dark');
+  document.getElementById('theme-btn').textContent=d?'🌙':'☀️';
+  localStorage.setItem('ds_theme',d?'light':'dark');
+}
+(function(){
+  const t=localStorage.getItem('ds_theme')||'light';
+  document.documentElement.setAttribute('data-theme',t);
+  window.addEventListener('DOMContentLoaded',()=>{
+    document.getElementById('theme-btn').textContent=t==='dark'?'☀️':'🌙';
+  });
+})();
+
+// Tabs
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['calc','history'][i]===name));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  if(name==='history'){renderHist();renderMonthSum();}
+}
+
+// Date
+function setDateToday(){
+  const d=new Date();
+  document.getElementById('date').value=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function getDateStr(){
+  const v=document.getElementById('date').value;if(!v)return '—';
+  const d=new Date(v);
+  return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();
+}
+function getBnDate(){
+  const v=document.getElementById('date').value;if(!v)return '—';
+  const d=new Date(v);
+  const days=['রবিবার','সোমবার','মঙ্গলবার','বুধবার','বৃহস্পতিবার','শুক্রবার','শনিবার'];
+  const months=['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
+  return days[d.getDay()]+', '+d.getDate()+' '+months[d.getMonth()]+' '+d.getFullYear();
+}
+
+// Auto-fill previous due from last saved entry
+function autoFillPrev(){
+  const h=getHist();
+  if(!h.length){showToast('⚠️ কোনো history নেই');return;}
+  const last=h[0];
+  document.getElementById('prev_due').value=fmt(last.final_due||0);
+  calc();
+  showToast('⚡ Auto-filled: ৳'+fmt(last.final_due||0));
+}
+
+// Count-up animation
+let prevFinal=0,animId=null;
+function animateFinal(target){
+  if(animId)cancelAnimationFrame(animId);
+  const el=document.getElementById('final_due');
+  const start=prevFinal,dur=380,t0=performance.now();
+  function step(now){
+    const p=Math.min((now-t0)/dur,1);
+    const ease=1-Math.pow(1-p,3);
+    const cur=Math.round(start+(target-start)*ease);
+    el.textContent=fmtBn(cur);
+    el.style.color=cur>=0?'#4ade80':'#f87171';
+    if(p<1){animId=requestAnimationFrame(step);}
+    else{prevFinal=target;el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');}
+  }
+  animId=requestAnimationFrame(step);
+  // header
+  document.getElementById('hdr-final').textContent=(target>=0?'+':'')+fmtBn(target);
+  document.getElementById('hdr-final').style.color=target>=0?'#4ade80':'#f87171';
+  document.getElementById('hdr-final').style.textShadow=target>=0?'0 0 20px rgba(74,222,128,.6)':'0 0 20px rgba(248,113,113,.6)';
+  var hdrEl=document.querySelector('.hdr');
+  if(hdrEl)hdrEl.style.boxShadow=target>=0?'0 4px 28px rgba(74,222,128,.15)':'0 4px 28px rgba(248,113,113,.15)';
+}
+
+// Main calc
+let lastData={};
+function renderBreakdown(fieldId, elId, color, borderColor){
+  var el=document.getElementById(fieldId);
+  if(!el)return;
+  var vals=splitExprParts(el.value);
+  var container=document.getElementById(elId+'-breakdown-list');
+  var expandBtn=document.getElementById(elId+'-expand-btn');
+  if(!container)return;
+  if(vals.length<2){
+    if(expandBtn)expandBtn.style.display='none';
+    var bd=document.getElementById(elId+'-breakdown');
+    if(bd)bd.style.display='none';
+    return;
+  }
+  if(expandBtn)expandBtn.style.display='inline-block';
+  var total=vals.reduce(function(a,b){return a+b;},0);
+  // Build rows directly without renderBdRows to avoid any scope issues
+  var rows=vals.map(function(v,i){
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid '+borderColor+';">'+
+      '<span data-bd-field="'+fieldId+'" data-bd-idx="'+i+'" style="font-size:13px;font-weight:600;color:'+color+';">'+(i+1)+'. ৳'+fmt(v)+'</span>'+
+      '<div style="display:flex;gap:6px;">'+
+        '<button onclick="bdEdit(\x27'+fieldId+'\x27,'+i+')" style="width:28px;height:28px;border:none;border-radius:8px;background:#fffbeb;color:#b45309;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✏️</button>'+
+        '<button onclick="bdDelete(\x27'+fieldId+'\x27,'+i+')" style="width:28px;height:28px;border:none;border-radius:8px;background:#fef2f2;color:#dc2626;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">🗑️</button>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+  container.innerHTML=rows+'<div style="border-top:1px solid '+borderColor+';margin-top:6px;padding-top:6px;font-weight:700;color:'+color+';">মোট = ৳'+fmt(total)+'</div>';
+}
+function calc(){
+  const prev=parseExpr(document.getElementById('prev_due').value||'0');
+  const number=parseExpr(document.getElementById('number').value||'0');
+  const bank=parseExpr(document.getElementById('bank').value||'0');
+  const b2b_bank=parseExpr(document.getElementById('b2b_bank').value||'0');
+  const usdt_expr=document.getElementById('usdt_expr').value||'0';
+  const usdt_sum=parseExpr(usdt_expr);
+  const rate=nf('usdt_rate');
+  const nagad_expr=document.getElementById('nagad_expr').value||'0';
+  const nagad=parseExpr(nagad_expr);
+  const nagad_b2b_expr=document.getElementById('nagad_b2b_expr').value||'0';
+  const nagad_b2b=parseExpr(nagad_b2b_expr);
+  const comm=Math.round(number*0.002);
+  const nagad_comm=Math.round(nagad*0.0005);
+  const nagad_b2b_comm=Math.round(nagad_b2b*0.0005);
+  const today_total=number+bank+b2b_bank;
+  const subtotal=today_total+comm;
+  const usdt_total=usdt_sum*rate;
+  const final_due=prev+subtotal+nagad_comm+nagad_b2b_comm-usdt_total;
+
+  document.getElementById('comm_disp').textContent=fmt(comm);
+  document.getElementById('comm_calc').textContent=fmt(comm);
+  document.getElementById('nagad_total_disp').textContent=fmt(nagad);
+  document.getElementById('nagad_comm_disp').textContent=fmt(nagad_comm);
+  document.getElementById('nagad_b2b_total_disp').textContent=fmt(nagad_b2b);
+  document.getElementById('nagad_b2b_comm_disp').textContent=fmt(nagad_b2b_comm);
+  document.getElementById('today_total').textContent=fmt(today_total);
+  document.getElementById('subtotal').textContent=fmt(subtotal);
+  document.getElementById('usdt_total').textContent=fmt(usdt_total);
+  document.getElementById('usdt_total_disp').textContent=fmt(usdt_total);
+  document.getElementById('hdr-date').textContent=getBnDate();
+  document.getElementById('hdr-sub').textContent=fmtBn(subtotal);
+  document.getElementById('hdr-usdt').textContent=fmtBn(usdt_total);
+  document.getElementById('hdr-prev').textContent=fmtBn(prev);
+  document.getElementById('formula_row').textContent=
+    fmt(prev)+' + '+fmt(subtotal)+' + '+fmt(nagad_comm)+(nagad_b2b_comm?' + '+fmt(nagad_b2b_comm):'')+' − '+fmt(usdt_total)+' = '+fmt(final_due);
+
+  animateFinal(final_due);
+
+  const uRaw=splitExprParts(document.getElementById('usdt_expr').value||'');
+  const uLine=uRaw.length&&usdt_total?'('+uRaw.map(fmt).join('+')+') × '+rate+' = '+fmt(usdt_total):'0';
+  const coRaw=splitExprParts(document.getElementById('number').value||'0');
+  const bkRaw=splitExprParts(document.getElementById('bank').value||'0');
+  const coMulti=coRaw.length>1;
+  const bkMulti=bkRaw.length>1;
+  // Show/hide total rows and expand buttons
+  document.getElementById('co-total-row').style.display=coMulti?'flex':'none';
+  document.getElementById('co-expand-btn').style.display=coMulti?'inline-block':'none';
+  document.getElementById('bk-expand-btn').style.display=bkMulti?'inline-block':'none';
+  if(coMulti){
+    document.getElementById('co_total_disp').textContent=fmt(number);
+    document.getElementById('co-breakdown-list').innerHTML=coRaw.map(function(v,i){
+      return '<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid #dbeafe;">'+
+        '<span data-bd-field="number" data-bd-idx="'+i+'" style="font-size:13px;font-weight:600;color:#1d4ed8;">'+(i+1)+'. ৳'+fmt(v)+'</span>'+
+        '<div style="display:flex;gap:6px;">'+
+          '<button onclick="bdEdit(\'number\','+i+')" style="width:28px;height:28px;border:none;border-radius:8px;background:#fffbeb;color:#b45309;font-size:14px;cursor:pointer;">✏️</button>'+
+          '<button onclick="bdDelete(\'number\','+i+')" style="width:28px;height:28px;border:none;border-radius:8px;background:#fef2f2;color:#dc2626;font-size:14px;cursor:pointer;">🗑️</button>'+
+        '</div></div>';
+    }).join('')+'<div style="border-top:1px solid #bfdbfe;margin-top:6px;padding-top:6px;font-weight:700;color:#1d4ed8;">মোট = ৳'+fmt(number)+'</div>';
+  }
+  document.getElementById('bk_total_disp').textContent=fmt(bank);
+  ['number','bank','b2b_bank','usdt_expr','nagad_expr','nagad_b2b_expr'].forEach(updateScrollBtn);
+  if(bkMulti){
+    document.getElementById('bk-breakdown-list').innerHTML=bkRaw.map(function(v,i){
+      return '<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid #dbeafe;">'+
+        '<span data-bd-field="bank" data-bd-idx="'+i+'" style="font-size:13px;font-weight:600;color:#1d4ed8;">'+(i+1)+'. ৳'+fmt(v)+'</span>'+
+        '<div style="display:flex;gap:6px;">'+
+          '<button onclick="bdEdit(\'bank\','+i+')" style="width:28px;height:28px;border:none;border-radius:8px;background:#fffbeb;color:#b45309;font-size:14px;cursor:pointer;">✏️</button>'+
+          '<button onclick="bdDelete(\'bank\','+i+')" style="width:28px;height:28px;border:none;border-radius:8px;background:#fef2f2;color:#dc2626;font-size:14px;cursor:pointer;">🗑️</button>'+
+        '</div></div>';
+    }).join('')+'<div style="border-top:1px solid #bfdbfe;margin-top:6px;padding-top:6px;font-weight:700;color:#1d4ed8;">মোট = ৳'+fmt(bank)+'</div>';
+  }
+  if(!coMulti)document.getElementById('co-breakdown').style.display='none';
+  if(!bkMulti)document.getElementById('bk-breakdown').style.display='none';
+
+  // B2B Bank breakdown
+  const b2bRaw=splitExprParts(document.getElementById('b2b_bank').value||'0');
+  const b2bMulti=b2bRaw.length>1;
+  document.getElementById('b2b-expand-btn').style.display=b2bMulti?'inline-block':'none';
+  document.getElementById('b2b-total-row').style.display=b2bMulti?'flex':'none';
+  document.getElementById('b2b_total_disp').textContent=fmt(b2b_bank);
+  if(b2bMulti){
+    document.getElementById('b2b-breakdown-list').innerHTML=b2bRaw.map(function(v,i){
+      return '<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid #99f6e4;">'+
+        '<span data-bd-field="b2b_bank" data-bd-idx="'+i+'" style="font-size:13px;font-weight:600;color:#0f766e;">'+(i+1)+'. ৳'+fmt(v)+'</span>'+
+        '<div style="display:flex;gap:6px;">'+
+          '<button onclick="bdEdit(\'b2b_bank\','+i+')" style="width:28px;height:28px;border:none;border-radius:8px;background:#fffbeb;color:#b45309;font-size:14px;cursor:pointer;">✏️</button>'+
+          '<button onclick="bdDelete(\'b2b_bank\','+i+')" style="width:28px;height:28px;border:none;border-radius:8px;background:#fef2f2;color:#dc2626;font-size:14px;cursor:pointer;">🗑️</button>'+
+        '</div></div>';
+    }).join('')+'<div style="border-top:1px solid #5eead4;margin-top:6px;padding-top:6px;font-weight:700;color:#0f766e;">মোট = ৳'+fmt(b2b_bank)+'</div>';
+  }
+  if(!b2bMulti)document.getElementById('b2b-breakdown').style.display='none';
+
+  // USDT, Nagad, Nagad B2B breakdown with edit/delete
+  renderBreakdown('usdt_expr','usdt','#6b21a8','#e9d5ff');
+  renderBreakdown('nagad_expr','nagad','#166534','#bbf7d0');
+  renderBreakdown('nagad_b2b_expr','nagad_b2b','#065f46','#a7f3d0');
+  // Text: only total (no breakdown)
+  const coLine=fmt(number);
+  const bkLine=fmt(bank);
+  const b2bLine=fmt(b2b_bank);
+  const sep='──────────────────';
+
+  const txt=
+`📅 DATE: ${getDateStr()}
+
+🔴 PREVIOUS DUE : ${fmt(prev)}
+
+
+💰 TODAY PAID
+• Cash Out : ${coLine}
+• Bank : ${bkLine}${b2b_bank>0?'\n• B2B Bank : '+b2bLine:''}
+• Commission : ${fmt(comm)}
+
+${sep}
+💎 Today Total : ${fmt(today_total)}
+💎 Subtotal (Inc. Comm): ${fmt(subtotal)}
+
+🌑 USDT SETTLEMENT
+  ${uLine}
+
+🌑 NAGAD EXCHANCE= ${fmt(nagad)}  (Comm: ${fmt(nagad_comm)})${nagad_b2b>0?'\n📲 NAGAD B2B= '+fmt(nagad_b2b)+'  (Comm: '+fmt(nagad_b2b_comm)+')':''}
+
+📊 FINAL CALCULATION
+${fmt(prev)} + ${fmt(subtotal)} + ${fmt(nagad_comm)}${nagad_b2b_comm?' + '+fmt(nagad_b2b_comm):''} − ${fmt(usdt_total)}
+
+🏆 FINAL DUE : ${fmt(final_due)}`;
+
+  document.getElementById('copy_text').textContent=txt;
+  // Save raw expression strings so loadHist can restore exactly
+  const _raw_prev=document.getElementById('prev_due').value||'';
+  const _raw_number=document.getElementById('number').value||'';
+  const _raw_bank=document.getElementById('bank').value||'';
+  const _raw_b2b_bank=document.getElementById('b2b_bank').value||'';
+  const _raw_usdt_expr=document.getElementById('usdt_expr').value||'';
+  const _raw_usdt_rate=document.getElementById('usdt_rate').value||'';
+  const _raw_nagad_expr=document.getElementById('nagad_expr').value||'';
+  const _raw_nagad_b2b_expr=document.getElementById('nagad_b2b_expr').value||'';
+  lastData={date:getDateStr(),bnDate:getBnDate(),prev,number,bank,b2b_bank,comm,today_total,subtotal,usdt_total,nagad,nagad_comm,nagad_b2b,nagad_b2b_comm,final_due,txt,agents:JSON.parse(JSON.stringify(agents)),raw:{prev:_raw_prev,number:_raw_number,bank:_raw_bank,b2b_bank:_raw_b2b_bank,usdt_expr:_raw_usdt_expr,usdt_rate:_raw_usdt_rate,nagad_expr:_raw_nagad_expr,nagad_b2b_expr:_raw_nagad_b2b_expr}};
+}
+
+// Copy
+function copyText(){
+  const txt=document.getElementById('copy_text').textContent;
+  if(txt.includes('উপরে data')){showToast('⚠️ আগে হিসাব দিন');return;}
+  navigator.clipboard.writeText(txt).then(()=>showToast('✅ Copied! Telegram এ paste করুন')).catch(()=>{
+    const el=document.getElementById('copy_text');
+    const r=document.createRange();r.selectNode(el);
+    window.getSelection().removeAllRanges();window.getSelection().addRange(r);
+    document.execCommand('copy');showToast('✅ Copied!');
+  });
+}
+
+// Reset
+function resetAll(){
+  _manualCo='';_manualBk='';
+  ['prev_due','number','bank','b2b_bank','usdt_expr','usdt_rate','nagad_expr','nagad_b2b_expr'].forEach(id=>document.getElementById(id).value='');
+  agents=[];window._editId=null;renderAgents();
+  prevFinal=0;
+  setDateToday();calc();
+}
+
+// ── PIN LOCK ──
+let pinBuffer='';
+let pinSetupMode=false;
+let pinSetupFirst='';
+
+function initPin(){
+  const saved=localStorage.getItem('ds_pin');
+  const pinOn=localStorage.getItem('ds_pin_on')==='1';
+  const el=document.getElementById('pin-overlay');
+  const lnk=document.getElementById('pin-setup-link');
+  const disBtn=document.getElementById('pin-dis-btn');
+  if(pinOn&&saved){
+    el.style.display='flex';
+    document.getElementById('pin-sub').textContent='PIN দিয়ে প্রবেশ করুন';
+    if(lnk)lnk.textContent='';
+  } else {
+    el.style.display='none';
+  }
+  if(disBtn)disBtn.style.display=pinOn?'block':'none';
+  updatePinSetBtn();
+}
+
+function pinPress(v){
+  const err=document.getElementById('pin-err');
+  err.textContent='';
+  if(v==='del'){pinBuffer=pinBuffer.slice(0,-1);}
+  else if(v==='ok'){checkPin();}
+  else if(pinBuffer.length<4){pinBuffer+=v;}
+  updatePinDots();
+  if(pinBuffer.length===4&&v!=='ok')setTimeout(checkPin,200);
+}
+
+function updatePinDots(){
+  for(let i=0;i<4;i++){
+    const d=document.getElementById('pd'+i);
+    if(d)d.className='pin-dot'+(i<pinBuffer.length?' filled':'');
+  }
+}
+
+function checkPin(){
+  if(pinSetupMode){
+    if(!pinSetupFirst){
+      pinSetupFirst=pinBuffer;pinBuffer='';
+      document.getElementById('pin-sub').textContent='আবার PIN দিন নিশ্চিত করতে';
+      updatePinDots();
+    } else {
+      if(pinBuffer===pinSetupFirst){
+        localStorage.setItem('ds_pin',pinBuffer);
+        localStorage.setItem('ds_pin_on','1');
+        pinBuffer='';pinSetupFirst='';pinSetupMode=false;
+        document.getElementById('pin-overlay').style.display='none';
+        closeSettings();
+        showToast('✅ PIN সেট হয়েছে!');
+        updatePinSetBtn();
+        document.getElementById('pin-dis-btn').style.display='block';
+      } else {
+        pinBuffer='';pinSetupFirst='';
+        document.getElementById('pin-err').textContent='❌ PIN মিলছে না, আবার চেষ্টা করুন';
+        document.getElementById('pin-sub').textContent='নতুন PIN দিন';
+        updatePinDots();
+      }
+    }
+    return;
+  }
+  const saved=localStorage.getItem('ds_pin');
+  if(pinBuffer===saved){
+    document.getElementById('pin-overlay').style.display='none';
+    pinBuffer='';updatePinDots();
+  } else {
+    document.getElementById('pin-err').textContent='❌ ভুল PIN';
+    pinBuffer='';updatePinDots();
+  }
+}
+
+function showPinSetup(){
+  pinSetupMode=true;pinBuffer='';pinSetupFirst='';
+  const el=document.getElementById('pin-overlay');
+  el.style.display='flex';
+  document.getElementById('pin-sub').textContent='নতুন PIN দিন (4 digit)';
+  document.getElementById('pin-err').textContent='';
+  updatePinDots();
+  closeSettings();
+}
+
+function disablePin(){
+  localStorage.removeItem('ds_pin');
+  localStorage.setItem('ds_pin_on','0');
+  document.getElementById('pin-overlay').style.display='none';
+  document.getElementById('pin-dis-btn').style.display='none';
+  updatePinSetBtn();
+  closeSettings();
+  showToast('🔓 PIN বন্ধ করা হয়েছে');
+}
+
+function updatePinSetBtn(){
+  const btn=document.getElementById('pin-set-btn');
+  if(!btn)return;
+  const has=localStorage.getItem('ds_pin');
+  btn.textContent=has?'PIN পরিবর্তন করুন':'PIN সেট করুন';
+}
+
+// ── SETTINGS MODAL ──
+function openSettings(){
+  const m=document.getElementById('settings-modal');
+  m.style.display='flex';
+  updatePinSetBtn();
+  renderFavList();
+}
+function closeSettings(){
+  document.getElementById('settings-modal').style.display='none';
+}
+
+// ── EXPORT / IMPORT ──
+function exportHistory(){
+  const h=getHist();
+  const data={version:1,exported:new Date().toISOString(),history:h};
+  const json=JSON.stringify(data,null,2);
+  try{
+    // Try download via blob
+    const blob=new Blob([json],{type:'application/json'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    a.download='settlement_backup_'+new Date().toISOString().slice(0,10)+'.json';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(()=>{URL.revokeObjectURL(url);document.body.removeChild(a);},1000);
+    showToast('📤 Export হয়েছে!');
+  }catch(e){
+    // Fallback: show in textarea to copy manually
+    showExportModal(json);
+  }
+}
+
+function showExportModal(json){
+  const overlay=document.createElement('div');
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9000;display:flex;align-items:center;justify-content:center;padding:16px;';
+  const box=document.createElement('div');
+  box.style.cssText='background:var(--card,#fff);border-radius:16px;padding:20px;width:100%;max-width:500px;max-height:80vh;display:flex;flex-direction:column;gap:12px;';
+  box.innerHTML='<div style="font-size:16px;font-weight:700;color:var(--tx,#000);">📤 History Export</div>'+
+    '<div style="font-size:12px;color:#888;">নিচের text টা copy করে .json file এ save করুন</div>';
+  const ta=document.createElement('textarea');
+  ta.value=json;
+  ta.readOnly=true;
+  ta.style.cssText='width:100%;height:200px;font-size:11px;font-family:monospace;border:1px solid #ddd;border-radius:8px;padding:8px;resize:none;background:#f8f8f8;';
+  const btnRow=document.createElement('div');
+  btnRow.style.cssText='display:flex;gap:8px;';
+  const copyBtn=document.createElement('button');
+  copyBtn.textContent='📋 Copy করুন';
+  copyBtn.style.cssText='flex:1;padding:10px;border:none;border-radius:10px;background:#1d4ed8;color:#fff;font-size:14px;font-weight:700;cursor:pointer;';
+  copyBtn.onclick=function(){
+    ta.select();
+    navigator.clipboard.writeText(json).then(()=>showToast('✅ Copied!'));
+  };
+  const closeBtn=document.createElement('button');
+  closeBtn.textContent='বন্ধ করুন';
+  closeBtn.style.cssText='flex:1;padding:10px;border:none;border-radius:10px;background:#f0f0f0;color:#555;font-size:14px;font-weight:600;cursor:pointer;';
+  closeBtn.onclick=function(){document.body.removeChild(overlay);};
+  btnRow.appendChild(copyBtn);
+  btnRow.appendChild(closeBtn);
+  box.appendChild(ta);
+  box.appendChild(btnRow);
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+  setTimeout(()=>ta.select(),100);
+}
+
+function importHistory(evt){
+  const file=evt.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      const data=JSON.parse(e.target.result);
+      const newItems=data.history||data;
+      if(!Array.isArray(newItems))throw new Error('Invalid format');
+      const existing=getHist();
+      const existIds=new Set(existing.map(x=>x.savedAt));
+      const toAdd=newItems.filter(x=>!existIds.has(x.savedAt));
+      const merged=[...existing,...toAdd].sort((a,b)=>b.savedAt-a.savedAt);
+      localStorage.setItem('ds_hist',JSON.stringify(merged));
+      showToast('📥 '+toAdd.length+' টি entry import হয়েছে!');
+      renderHist();renderMonthSum();
+      closeSettings();
+    }catch(err){
+      showToast('❌ Invalid file');
+    }
+  };
+  reader.readAsText(file);
+  evt.target.value='';
+}
+
+// ── FAVORITE AGENTS ──
+function getFavs(){try{return JSON.parse(localStorage.getItem('ds_favs')||'[]');}catch(e){return[];}}
+function saveFavs(f){localStorage.setItem('ds_favs',JSON.stringify(f));}
+
+function addFavorite(){
+  const inp=document.getElementById('fav-input');
+  const name=inp.value.trim();
+  if(!name){showToast('⚠️ নাম লিখুন');return;}
+  const favs=getFavs();
+  if(favs.includes(name)){showToast('⚠️ আগে থেকেই আছে');return;}
+  favs.push(name);saveFavs(favs);
+  inp.value='';
+  renderFavList();
+  renderFavBar();
+  showToast('⭐ '+name+' added!');
+}
+
+function removeFavorite(name){
+  saveFavs(getFavs().filter(f=>f!==name));
+  renderFavList();renderFavBar();
+}
+
+function renderFavList(){
+  const el=document.getElementById('fav-list');
+  if(!el)return;
+  const favs=getFavs();
+  if(!favs.length){
+    el.innerHTML='<div style="font-size:12px;color:var(--tx3);text-align:center;padding:8px;">কোনো favorite নেই</div>';
+    return;
+  }
+  el.innerHTML='';
+  favs.forEach(function(f){
+    const safe=f.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    const row=document.createElement('div');
+    row.style.cssText='display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--card);border-radius:8px;margin-bottom:6px;';
+    const lbl=document.createElement('span');
+    lbl.style.cssText='font-size:13px;color:var(--tx);font-weight:600;';
+    lbl.textContent='⭐ '+f;
+    const btn=document.createElement('button');
+    btn.textContent='×';
+    btn.style.cssText='border:none;background:#fef2f2;color:#dc2626;font-size:16px;font-weight:700;width:28px;height:28px;border-radius:7px;cursor:pointer;flex-shrink:0;';
+    btn.addEventListener('click',function(){removeFavorite(f);});
+    row.appendChild(lbl);
+    row.appendChild(btn);
+    el.appendChild(row);
+  });
+}
+
+function renderFavBar(){
+  const bar=document.getElementById('fav-bar');
+  if(!bar)return;
+  const favs=getFavs();
+  if(!favs.length){bar.style.display='none';return;}
+  bar.style.display='flex';
+  bar.innerHTML='';
+  favs.forEach(function(f){
+    const btn=document.createElement('button');
+    btn.textContent='⭐ '+f;
+    btn.style.cssText='padding:5px 12px;border:1.5px solid var(--bdr);border-radius:20px;background:var(--card);color:var(--tx);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;';
+    btn.onclick=function(){quickAdd2(f);};
+    bar.appendChild(btn);
+  });
+}
+
+function quickAdd2(name){
+  document.getElementById('ag-name').value=name;
+  document.getElementById('ag-amt').focus();
+}
+
+// History
+function getHist(){try{return JSON.parse(localStorage.getItem('ds_hist')||'[]');}catch(e){return[];}}
+function saveHist(){fireConfetti();
+  if(!lastData.date||lastData.date==='—'){showToast('⚠️ তারিখ দিন আগে');return;}
+  const h=getHist();
+  const idx=h.findIndex(e=>e.date===lastData.date);
+  if(idx>=0)h.splice(idx,1);
+  const entry={...lastData,savedAt:Date.now()};
+  h.unshift(entry);
+  localStorage.setItem('ds_hist',JSON.stringify(h));
+  showToast('💾 Saved! ('+lastData.date+')');
+}
+function delHist(savedAt){
+  const h=getHist().filter(e=>e.savedAt!==savedAt);
+  localStorage.setItem('ds_hist',JSON.stringify(h));
+  renderHist();renderMonthSum();
+}
+function loadHist(savedAt){
+  const e=getHist().find(x=>x.savedAt===savedAt);if(!e)return;
+  const p=e.date.split('/');
+  if(p.length===3)document.getElementById('date').value=p[2]+'-'+p[1]+'-'+p[0];
+  // prev_due: store as raw number string (no comma formatting)
+  document.getElementById('prev_due').value=String(e.prev||0);
+
+  // Restore raw input strings exactly as user typed — no reformatting
+  const raw=e.raw||{};
+  const setRaw=(id,rawVal,fallbackNum)=>{
+    const el=document.getElementById(id);if(!el)return;
+    if(rawVal!==undefined&&rawVal!==null&&rawVal!==''){
+      el.value=rawVal; // exact as typed
+    } else if(fallbackNum){
+      el.value=String(fallbackNum); // plain number fallback
+    } else {
+      el.value='';
+    }
+    updateScrollBtn(id);
+  };
+
+  setRaw('number',    raw.number,    e.number);
+  setRaw('bank',      raw.bank,      e.bank);
+  setRaw('b2b_bank',  raw.b2b_bank,  e.b2b_bank);
+  setRaw('usdt_expr', raw.usdt_expr, '');
+  if(raw.usdt_rate) document.getElementById('usdt_rate').value=raw.usdt_rate;
+  setRaw('nagad_expr',     raw.nagad_expr,     e.nagad);
+  setRaw('nagad_b2b_expr', raw.nagad_b2b_expr, e.nagad_b2b);
+
+  // Restore agents exactly
+  agents=e.agents&&Array.isArray(e.agents)?JSON.parse(JSON.stringify(e.agents)):[];
+  renderAgents();
+  prevFinal=0;calc();switchTab('calc');showToast('✅ Loaded: '+e.date);
+}
+function copyHistTxt(savedAt){
+  const e=getHist().find(x=>x.savedAt===savedAt);if(!e?.txt)return;
+  navigator.clipboard.writeText(e.txt).then(()=>showToast('✅ Copied!'));
+}
+function clearDateFilter(){
+  document.getElementById('hist-from').value='';
+  document.getElementById('hist-to').value='';
+  renderHist();
+}
+
+function dateToYMD(ddmmyyyy){
+  // convert DD/MM/YYYY to YYYY-MM-DD for comparison
+  const p=ddmmyyyy.split('/');
+  if(p.length!==3)return '';
+  return p[2]+'-'+p[1].padStart(2,'0')+'-'+p[0].padStart(2,'0');
+}
+
+function getFiltered(){
+  const h=getHist();
+  const q=(document.getElementById('hist-search')?.value||'').toLowerCase().trim();
+  const fromVal=document.getElementById('hist-from')?.value||'';
+  const toVal=document.getElementById('hist-to')?.value||'';
+
+  return h.filter(e=>{
+    // Date range filter
+    if(fromVal||toVal){
+      const eDate=dateToYMD(e.date||'');
+      if(fromVal&&eDate&&eDate<fromVal)return false;
+      if(toVal&&eDate&&eDate>toVal)return false;
+    }
+    // Text search
+    if(!q)return true;
+    // Search in date
+    if((e.date||'').includes(q))return true;
+    if((e.bnDate||'').toLowerCase().includes(q))return true;
+    // Amount search: exact match
+    const qClean=q.replace(/,/g,'').replace(/[+-]/g,'');
+    const isNumeric=/^\d+$/.test(qClean);
+    if(isNumeric){
+      const amounts=[e.final_due,e.subtotal,e.today_total,e.usdt_total,e.nagad,e.comm];
+      for(const amt of amounts){
+        if(amt===undefined||amt===null)continue;
+        if(String(Math.abs(Math.round(amt)))===qClean)return true;
+      }
+      if(e.agents&&e.agents.some(a=>String(Math.abs(Math.round(a.amt||0)))===qClean))return true;
+    }
+    // Name search: partial
+    if(e.agents&&e.agents.some(a=>(a.name||'').toLowerCase().includes(q)))return true;
+    return false;
+  });
+}
+function renderHist(){
+  const f=getFiltered(),c=document.getElementById('hist-con');
+  if(!f.length){
+    c.innerHTML='<div class="hist-empty"><div class="ei">'+(getHist().length?'🔍':'🕒')+'</div><div>'+(getHist().length?'কোনো result নেই':'এখনো কোনো history নেই')+'</div><div style="font-size:12px;margin-top:6px;color:#bbb;">'+(getHist().length?'অন্য keyword চেষ্টা করুন':'হিসাব করে Save করুন')+'</div></div>';
+    return;
+  }
+  c.innerHTML=f.map(e=>`
+    <div class="hi">
+      <div class="hi-top">
+        <div class="hi-date">📅 ${e.date} <span style="font-size:11px;color:#999;">${e.bnDate||''}</span></div>
+        <div class="hi-due ${(e.final_due||0)<0?'neg':''}">৳${fmt(e.final_due||0)}</div>
+      </div>
+      <div class="hi-row">
+        <span>💰 ৳${fmt(e.subtotal||0)}</span>
+        <span>🪙 ৳${fmt(e.usdt_total||0)}</span>
+        <span>🟢 ৳${fmt(e.nagad||0)}</span>
+      </div>
+      ${(()=>{
+        const q=(document.getElementById('hist-search')?.value||'').toLowerCase().trim();
+        if(!e.agents||!e.agents.length)return '';
+        // If searching for agent name, show matched agents with amounts
+        const qClean=q.replace(/,/g,'').replace(/[+-]/g,'');
+        const matchedAgents=q?e.agents.filter(a=>{
+          // Name search: partial match
+          if((a.name||'').toLowerCase().includes(q))return true;
+          // Amount search: exact match only
+          const aRaw=String(Math.abs(Math.round(a.amt||0)));
+          const aFmt=fmt(Math.abs(a.amt||0)).replace(/,/g,'');
+          if(qClean&&(aRaw===qClean||aFmt===qClean))return true;
+          return false;
+        }):[];
+        if(matchedAgents.length){
+          const rows=matchedAgents.map(a=>{
+            const em=a.type==='co'?'💸':a.type==='bk'?'🏦':a.type==='b2b'?'🏦B2B':'📝';
+            const col=a.amt>=0?'#16a34a':'#dc2626';
+            return '<span style="background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:6px;padding:3px 8px;font-size:12px;">'+em+' <b>'+a.name+'</b> : <span style="color:'+col+';font-weight:700;">'+(a.amt>=0?'+':'')+fmt(a.amt)+'</span></span>';
+          }).join(' ');
+          return '<div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:5px;">'+rows+'</div>';
+        }
+        // Otherwise just show all agent names
+        return '<div style="font-size:11px;color:var(--tx3);margin-top:4px;padding:0 2px;">📝 '+[...new Set(e.agents.map(a=>a.name))].join(', ')+'</div>';
+      })()}
+      <div class="hi-acts">
+        <button class="hi-btn ld" onclick="loadHist(${e.savedAt})">📂 Load</button>
+        <button class="hi-btn cp" onclick="copyHistTxt(${e.savedAt})">📋 Copy</button>
+        <button class="hi-btn dl" onclick="delHist(${e.savedAt})">🗑</button>
+      </div>
+    </div>`).join('');
+}
+
+// Monthly Summary
+function renderMonthSum(){
+  const h=getHist();
+  const c=document.getElementById('month-sum-con');
+  if(!h.length){c.innerHTML='';return;}
+  const now=new Date();
+  const mm=String(now.getMonth()+1).padStart(2,'0'),yy=now.getFullYear();
+  const entries=h.filter(e=>{const p=(e.date||'').split('/');return p.length===3&&p[1]===mm&&p[2]===String(yy);});
+  if(!entries.length){c.innerHTML='';return;}
+  const months=['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
+  const totSub=entries.reduce((s,e)=>s+(e.subtotal||0),0);
+  const totUSDT=entries.reduce((s,e)=>s+(e.usdt_total||0),0);
+  const totNagad=entries.reduce((s,e)=>s+(e.nagad||0),0);
+  const lastDue=entries[0]?.final_due||0;
+  c.innerHTML=`
+    <div class="month-summary">
+      <div class="ms-title">📅 ${months[now.getMonth()]} ${yy} — ${entries.length} দিন</div>
+      <div class="ms-grid">
+        <div class="ms-item"><div class="ms-label">মোট জমা</div><div class="ms-val">৳${fmt(totSub)}</div></div>
+        <div class="ms-item"><div class="ms-label">মোট USDT</div><div class="ms-val red">৳${fmt(totUSDT)}</div></div>
+        <div class="ms-item"><div class="ms-label">মোট Nagad</div><div class="ms-val">৳${fmt(totNagad)}</div></div>
+        <div class="ms-item"><div class="ms-label">সর্বশেষ Due</div><div class="ms-val ${lastDue<0?'red':''}">৳${fmt(lastDue)}</div></div>
+      </div>
+    </div>`;
+}
+
+
+
+
+// ── MOTIVATIONAL QUOTES ──
+const QUOTES = [
+  {e:"💰",q:"সফলতা রাতারাতি আসে না, প্রতিদিনের ছোট ছোট পদক্ষেপই বড় পরিবর্তন আনে।",a:"প্রবাদ"},
+  {e:"📈",q:"যে মানুষ তার অর্থের হিসাব রাখে, সে কখনো পথ হারায় না।",a:"Benjamin Franklin"},
+  {e:"🎯",q:"লক্ষ্য স্থির রাখো, প্রতিদিনের কাজ তোমাকে সেখানে পৌঁছে দেবে।",a:"প্রবাদ"},
+  {e:"🌟",q:"কঠোর পরিশ্রম এবং সঠিক হিসাব — সাফল্যের দুটি চাবিকাঠি।",a:"প্রবাদ"},
+  {e:"💡",q:"ছোট ছোট সঞ্চয়ই একদিন বড় সম্পদ হয়।",a:"প্রবাদ"},
+  {e:"🚀",q:"প্রতিটি দিন একটি নতুন সুযোগ — সঠিকভাবে কাজে লাগাও।",a:"প্রবাদ"},
+  {e:"🏆",q:"যে মানুষ আজকের কাজ আজ করে, সেই মানুষ আগামীকাল এগিয়ে থাকে।",a:"প্রবাদ"},
+  {e:"💎",q:"পরিশ্রম, সততা এবং হিসাব — এই তিনটি গুণ থাকলে সাফল্য অনিবার্য।",a:"প্রবাদ"},
+  {e:"🌈",q:"প্রতিদিনের ছোট জয়গুলো মিলেই বড় সাফল্য তৈরি হয়।",a:"প্রবাদ"},
+  {e:"⚡",q:"সময় এবং অর্থ — দুটোই মূল্যবান, কোনোটাই নষ্ট করো না।",a:"প্রবাদ"},
+  {e:"🔥",q:"তুমি যা করো তা ভালো করো, সাফল্য এমনিতেই আসবে।",a:"Steve Jobs"},
+  {e:"🌙",q:"রাতের অন্ধকারে যে কাজ করে, সূর্যের আলোয় সে উজ্জ্বল হয়।",a:"প্রবাদ"},
+  {e:"💪",q:"কঠিন পরিস্থিতিতেও হিসাব ঠিক রাখো — এটাই সত্যিকারের শক্তি।",a:"প্রবাদ"},
+  {e:"🎊",q:"আজকের সঠিক সিদ্ধান্তই আগামীর সুখী জীবন।",a:"প্রবাদ"},
+  {e:"🧠",q:"বুদ্ধিমান মানুষ আয় করে, আরো বুদ্ধিমান মানুষ সঞ্চয় করে।",a:"প্রবাদ"},
+  {e:"⏰",q:"সময় একবার গেলে ফিরে আসে না — প্রতিটি মুহূর্তকে সঠিকভাবে ব্যবহার করো।",a:"প্রবাদ"},
+  {e:"🤝",q:"বিশ্বাস অর্জন করতে বছর লাগে, হারাতে এক সেকেন্ড।",a:"প্রবাদ"},
+  {e:"📊",q:"হিসাব যার পরিষ্কার, ব্যবসা তার সফল।",a:"প্রবাদ"},
+  {e:"🌅",q:"প্রতিটি সকাল একটি নতুন শুরু — হতাশা ভুলে এগিয়ে যাও।",a:"প্রবাদ"},
+  {e:"💸",q:"টাকা উপার্জন করা শিল্প, রাখতে পারাটা বিজ্ঞান।",a:"প্রবাদ"},
+  {e:"🎓",q:"অভিজ্ঞতা থেকে শিখলে তুমি জ্ঞানী, অন্যের অভিজ্ঞতা থেকে শিখলে তুমি বুদ্ধিমান।",a:"প্রবাদ"},
+  {e:"🏅",q:"সফল মানুষেরা সুযোগ খোঁজে না, সুযোগ তৈরি করে।",a:"প্রবাদ"},
+  {e:"🌊",q:"বড় স্বপ্ন দেখো, ছোট থেকে শুরু করো, দ্রুত শেখো।",a:"প্রবাদ"},
+  {e:"🔑",q:"সততাই সেরা নীতি — ব্যবসায় এবং জীবনে।",a:"Benjamin Franklin"},
+  {e:"🌿",q:"ধৈর্য ধরো, পরিশ্রম করো — ফল অবশ্যই আসবে।",a:"প্রবাদ"},
+  {e:"🎵",q:"কাজকে ভালোবাসলে কাজ কখনো কঠিন মনে হয় না।",a:"প্রবাদ"},
+  {e:"🦋",q:"পরিবর্তনকে ভয় পেও না, পরিবর্তনই অগ্রগতির পথ।",a:"প্রবাদ"},
+  {e:"🌺",q:"আজকের কষ্ট আগামীকালের আনন্দ।",a:"প্রবাদ"},
+  {e:"🔮",q:"ভবিষ্যৎ তাদের জন্য যারা আজকে প্রস্তুতি নেয়।",a:"Malcolm X"},
+  {e:"⭐",q:"তোমার সেরাটা দাও — বাকি সব এমনিতেই ঠিক হয়ে যাবে।",a:"প্রবাদ"},
+  {e:"🏗️",q:"বড় ব্যবসা ছোট ছোট সঠিক সিদ্ধান্তের উপর গড়ে ওঠে।",a:"প্রবাদ"},
+  {e:"🎪",q:"সফলতার কোনো শর্টকাট নেই — শুধু সঠিক পথ আছে।",a:"প্রবাদ"},
+  {e:"🌻",q:"অন্যকে সাহায্য করলে নিজে এগিয়ে যাওয়া যায়।",a:"প্রবাদ"},
+  {e:"🦅",q:"উঁচুতে উড়তে চাইলে ঝড়কে ভয় পেলে চলবে না।",a:"প্রবাদ"},
+  {e:"💫",q:"তুমি যতটুকু বিনিয়োগ করবে নিজেকে, ততটুকুই ফিরে পাবে।",a:"প্রবাদ"},
+  {e:"🎯",q:"ব্যর্থতা সাফল্যের উল্টো নয়, সাফল্যের অংশ।",a:"Arianna Huffington"},
+  {e:"🔆",q:"জ্ঞান যার বেশি, সম্পদ তার বেশি।",a:"প্রবাদ"},
+  {e:"🛡️",q:"সৎ থাকলে রাতে ভালো ঘুম হয়।",a:"প্রবাদ"},
+  {e:"🚂",q:"গতি বজায় রাখো — থামলেই পিছিয়ে পড়বে।",a:"প্রবাদ"},
+  {e:"🌍",q:"ছোট কাজে বড় মনোযোগ দাও — সেটাই পার্থক্য তৈরি করে।",a:"প্রবাদ"},
+  {e:"🎁",q:"প্রতিটি চ্যালে৤০ আসলে একটি লুকানো সুযোগ।",a:"প্রবাদ"},
+  {e:"🌠",q:"স্বপ্ন দেখো, পরিকল্পনা করো, কাজ করো।",a:"প্রবাদ"},
+  {e:"🏊",q:"কষ্ট ছাড়া কেষ্ট মেলে না।",a:"বাংলা প্রবাদ"},
+  {e:"🦁",q:"সাহসীরাই ইতিহাস তৈরি করে।",a:"প্রবাদ"},
+];
+
+let _quoteIdx=0;
+function showDailyQuote(){
+  const el=document.getElementById('quote-text');
+  const em=document.getElementById('quote-emoji');
+  const au=document.getElementById('quote-author');
+  if(!el)return;
+  // rotate every 10 min based on current time
+  const now=new Date();
+  _quoteIdx=Math.floor((now.getHours()*60+now.getMinutes())/10) % QUOTES.length;
+  const q=QUOTES[_quoteIdx];
+  el.style.opacity='0';
+  el.style.transition='opacity 0.5s';
+  setTimeout(function(){
+    el.textContent=q.q;
+    em.textContent=q.e;
+    au.textContent='— '+q.a.replace(/^— /,'');
+    el.style.opacity='1';
+  },300);
+}
+function updateClock(){
+  const cl=document.getElementById('live-clock');
+  const dl=document.getElementById('live-date');
+  if(!cl)return;
+  const now=new Date();
+  const hh=String(now.getHours()).padStart(2,'0');
+  const mm=String(now.getMinutes()).padStart(2,'0');
+  const ss=String(now.getSeconds()).padStart(2,'0');
+  cl.textContent=hh+':'+mm+':'+ss;
+  const days=['রবি','সোম','মঙ্গল','বুধ','বৃহ','শুক্র','শনি'];
+  const months=['জানু','ফেব্র','মার্চ','এপ্র','মে','জুন','জুল','আগ','সেপ্ট','অক্ট','নভ','ডিস'];
+  dl.textContent=days[now.getDay()]+', '+now.getDate()+' '+months[now.getMonth()];
+  // rotate quote every 10 min
+  const newIdx=Math.floor((now.getHours()*60+now.getMinutes())/10) % QUOTES.length;
+  if(newIdx!==_quoteIdx){ _quoteIdx=newIdx; showDailyQuote(); }
+}
+setInterval(updateClock,1000);
+
+// ── SHARE AS IMAGE ──
+function shareAsImage(){
+  const txt=document.getElementById('copy_text').textContent;
+  if(txt.includes('উপরে data')){showToast('⚠️ আগে হিসাব দিন');return;}
+
+  const finalDue=lastData.final_due||0;
+  const isPos=finalDue>=0;
+
+  // Build styled div — light theme for clarity
+  const wrap=document.createElement('div');
+  wrap.style.cssText='position:fixed;left:-9999px;top:0;width:600px;padding:0;background:#ffffff;font-family:Arial,sans-serif;border-radius:0;overflow:hidden;';
+
+  // Header
+  const hd=document.createElement('div');
+  hd.style.cssText='background:linear-gradient(135deg,#1a1a2e,#0f3460);padding:18px 24px;display:flex;justify-content:space-between;align-items:center;';
+  hd.innerHTML=
+    '<div style="display:flex;align-items:center;gap:10px;">'
+    +'<div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#f59e0b,#ef4444);display:flex;align-items:center;justify-content:center;font-size:20px;">📊</div>'
+    +'<div><div style="font-size:16px;font-weight:800;color:#fff;letter-spacing:-.3px;">Daily Settlement</div>'
+    +'<div style="font-size:11px;color:#94a3b8;margin-top:1px;">'+(lastData.bnDate||lastData.date||'')+'</div></div></div>'
+    +'<div style="text-align:right;">'
+    +'<div style="font-size:10px;color:#94a3b8;margin-bottom:2px;">Final Due</div>'
+    +'<div style="font-size:20px;font-weight:800;color:'+(isPos?'#4ade80':'#f87171')+';">৳'+fmt(finalDue)+'</div>'
+    +'</div>';
+
+  // Body rows — parse txt into clean rows
+  const body=document.createElement('div');
+  body.style.cssText='padding:16px 20px;background:#fff;';
+
+  const lines=txt.split('\n');
+  lines.forEach(function(line){
+    if(!line.trim())return;
+    const row=document.createElement('div');
+    // Section headers (emoji lines)
+    if(/^[📅🔴💰💎🌑📊🏆]/.test(line)){
+      row.style.cssText='font-size:12px;font-weight:700;color:#1e293b;margin-top:12px;margin-bottom:4px;padding-bottom:4px;border-bottom:1px solid #e2e8f0;';
+      row.textContent=line;
+    }
+    // Key-value lines with •
+    else if(line.startsWith('•')){
+      const parts=line.replace('•','').split(':');
+      row.style.cssText='display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f1f5f9;font-size:13px;';
+      const lbl=document.createElement('span');
+      lbl.style.cssText='color:#64748b;';
+      lbl.textContent=parts[0].trim();
+      const val=document.createElement('span');
+      val.style.cssText='font-weight:700;color:#0f172a;font-family:monospace;';
+      val.textContent=(parts.slice(1).join(':')).trim();
+      row.appendChild(lbl);
+      row.appendChild(val);
+    }
+    // FINAL DUE line
+    else if(line.includes('FINAL DUE')){
+      row.style.cssText='display:flex;justify-content:space-between;padding:10px 14px;margin-top:10px;border-radius:10px;background:'+(isPos?'#f0fdf4':'#fef2f2')+';';
+      const parts=line.split(':');
+      const lbl=document.createElement('span');
+      lbl.style.cssText='font-size:14px;font-weight:800;color:'+(isPos?'#166534':'#991b1b')+';';
+      lbl.textContent=parts[0].trim();
+      const val=document.createElement('span');
+      val.style.cssText='font-size:16px;font-weight:800;color:'+(isPos?'#16a34a':'#dc2626')+';font-family:monospace;';
+      val.textContent=(parts.slice(1).join(':')).trim();
+      row.appendChild(lbl);
+      row.appendChild(val);
+    }
+    // separator line
+    else if(/^[──]+$/.test(line.trim())){
+      row.style.cssText='border-top:1px solid #e2e8f0;margin:6px 0;';
+    }
+    // formula/calculation lines
+    else{
+      row.style.cssText='font-size:11px;color:#475569;padding:3px 0;font-family:monospace;';
+      row.textContent=line;
+    }
+    body.appendChild(row);
+  });
+
+  // Footer
+  const ft=document.createElement('div');
+  ft.style.cssText='padding:10px 24px;background:#f8fafc;border-top:1px solid #e2e8f0;text-align:center;font-size:10px;color:#94a3b8;letter-spacing:.05em;';
+  ft.textContent='Exchange_Trade_Ltd';
+
+  wrap.appendChild(hd);
+  wrap.appendChild(body);
+  wrap.appendChild(ft);
+  document.body.appendChild(wrap);
+
+  showToast('📸 Image তৈরি হচ্ছে...');
+
+  const h2c=window.html2canvas||null;
+  if(!h2c){showToast('⚠️ html2canvas not loaded');document.body.removeChild(wrap);return;}
+
+  setTimeout(()=>{
+    h2c(wrap,{scale:4,backgroundColor:'#ffffff',useCORS:true,logging:false,imageTimeout:0,allowTaint:true}).then(canvas=>{
+      document.body.removeChild(wrap);
+      showImagePreview(canvas);
+    }).catch(()=>{document.body.removeChild(wrap);showToast('⚠️ Error');});
+  },300);
+}
+
+function showImagePreview(canvas){
+  const url=canvas.toDataURL('image/png');
+  const ov=document.createElement('div');
+  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;backdrop-filter:blur(8px);';
+  const modal=document.createElement('div');
+  modal.style.cssText='background:#12121e;border-radius:20px;overflow:hidden;width:min(96vw,500px);max-height:90vh;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.09);';
+  modal.onclick=function(e){e.stopPropagation();};
+  const hd=document.createElement('div');
+  hd.style.cssText='display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.08);';
+  hd.innerHTML='<span style="font-size:14px;font-weight:700;color:#fff;">🖼️ Settlement Image</span>';
+  const xbtn=document.createElement('button');
+  xbtn.textContent='×';
+  xbtn.style.cssText='border:none;background:rgba(255,255,255,.12);color:#fff;width:30px;height:30px;border-radius:50%;font-size:20px;cursor:pointer;';
+  xbtn.onclick=function(){document.body.removeChild(ov);};
+  hd.appendChild(xbtn);
+  const iw=document.createElement('div');
+  iw.style.cssText='overflow-y:auto;flex:1;padding:14px;background:#0d0d1a;display:flex;justify-content:center;';
+  const img=document.createElement('img');
+  img.src=url;img.style.cssText='max-width:100%;border-radius:10px;';
+  iw.appendChild(img);
+  const ac=document.createElement('div');
+  ac.style.cssText='display:flex;gap:10px;padding:14px 18px;border-top:1px solid rgba(255,255,255,.07);';
+  const dlbtn=document.createElement('button');
+  dlbtn.innerHTML='⬇️ Download';
+  dlbtn.style.cssText='flex:1;padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,#1d4ed8,#1e40af);color:#fff;font-size:14px;font-weight:700;cursor:pointer;';
+  dlbtn.onclick=function(){
+    const lnk=document.createElement('a');
+    lnk.href=url;lnk.download='settlement_'+(lastData.date||'image').replace(/\//g,'-')+'.png';lnk.click();
+    showToast('✅ Download হচ্ছে...');
+  };
+  const cl=document.createElement('button');
+  cl.textContent='✕ বন্ধ';
+  cl.style.cssText='padding:13px 18px;border:1px solid rgba(255,255,255,.15);border-radius:12px;background:transparent;color:#888;font-size:14px;cursor:pointer;';
+  cl.onclick=function(){document.body.removeChild(ov);};
+  ac.appendChild(dlbtn);ac.appendChild(cl);
+  modal.appendChild(hd);modal.appendChild(iw);modal.appendChild(ac);
+  ov.appendChild(modal);
+  ov.onclick=function(e){if(e.target===ov)document.body.removeChild(ov);};
+  document.body.appendChild(ov);
+}
+function downloadImage(canvas){
+  const url=canvas.toDataURL('image/png');
+  const lnk=document.createElement('a');lnk.href=url;
+  lnk.download='settlement_'+(lastData.date||'image').replace(/\//g,'-')+'.png';lnk.click();
+  showToast('✅ Download হচ্ছে...');
+}
+
+// ── CALCULATOR ──
+let calcExpr = '';
+function calcKeyHandler(e){
+  var key=e.key;
+  if(key>='0'&&key<='9'){calcPress(key);}
+  else if(key==='+'){calcPress('+');}
+  else if(key==='-'){calcPress('-');}
+  else if(key==='*'){calcPress('*');}
+  else if(key==='/'){e.preventDefault();calcPress('/');}
+  else if(key==='.'){calcPress('.');}
+  else if(key==='%'){calcPress('%');}
+  else if(key==='Enter'||key==='='){calcPress('=');}
+  else if(key==='Backspace'){calcPress('⌫');}
+  else if(key==='Escape'){closeCalc();}
+  else if(key==='c'||key==='C'){calcPress('C');}
+}
+function openCalc(){
+  document.getElementById('calc-modal').style.display='flex';
+  calcExpr='';
+  updateCalcDisplay();
+  document.addEventListener('keydown',calcKeyHandler);
+}
+function closeCalc(){ document.getElementById('calc-modal').style.display='none'; document.removeEventListener('keydown',calcKeyHandler); }
+function calcPress(v){
+  if(v==='C'){ calcExpr=''; }
+  else if(v==='⌫'){ calcExpr=calcExpr.slice(0,-1); }
+  else if(v==='='){
+    try{
+      const r=Function('"use strict";return ('+calcExpr.replace(/÷/g,'/').replace(/×/g,'*')+')')();
+      calcExpr=String(Math.round(r*100)/100);
+    }catch(e){ calcExpr='Error'; }
+  }
+  else if(v==='%'){
+    try{
+      const r=Function('"use strict";return ('+calcExpr+')')();
+      calcExpr=String(r/100);
+    }catch(e){}
+  }
+  else{ calcExpr+=v; }
+  updateCalcDisplay();
+}
+function updateCalcDisplay(){
+  document.getElementById('calc-expr').textContent=calcExpr||'';
+  try{
+    if(!calcExpr||calcExpr==='Error'){ document.getElementById('calc-result').textContent=calcExpr||'0'; return; }
+    const r=Function('"use strict";return ('+calcExpr.replace(/÷/g,'/').replace(/×/g,'*')+')')();
+    document.getElementById('calc-result').textContent=isFinite(r)?Math.round(r).toLocaleString('en-IN'):'...';
+  }catch(e){ document.getElementById('calc-result').textContent='...'; }
+}
+function copyCalcResult(){
+  const r=document.getElementById('calc-result').textContent.replace(/,/g,'');
+  navigator.clipboard.writeText(r).then(()=>{ showToast('✅ '+r+' copied!'); closeCalc(); });
+}
+
+// ── THEMES ──
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem('ds_theme',t);
+  // Update theme buttons
+  document.querySelectorAll('.theme-opt').forEach(btn=>{
+    btn.style.outline = btn.dataset.t===t ? '3px solid #f59e0b' : 'none';
+    btn.style.outlineOffset = '2px';
+  });
+  showToast('🎨 Theme পরিবর্তন হয়েছে!');
+}
+// Load saved theme
+(function(){
+  const t=localStorage.getItem('ds_theme')||'light';
+  document.documentElement.setAttribute('data-theme',t);
+  window.addEventListener('DOMContentLoaded',()=>{
+    document.getElementById('theme-btn').textContent=t==='dark'||t==='midnight'?'☀️':'🌙';
+    document.querySelectorAll('.theme-opt').forEach(btn=>{
+      btn.style.outline=btn.dataset.t===t?'3px solid #f59e0b':'none';
+      btn.style.outlineOffset='2px';
+    });
+  });
+})();
+
+// Override toggleTheme to cycle through themes
+function toggleTheme(){
+  const themes=['light','rose','teal','ocean','forest','sunset','coffee','slate','purple','dark','midnight','galaxy','lava','aurora'];
+  const cur=document.documentElement.getAttribute('data-theme')||'light';
+  const next=themes[(themes.indexOf(cur)+1)%themes.length];
+  setTheme(next);
+  const darkThemes=['dark','midnight','galaxy','lava','aurora'];document.getElementById('theme-btn').textContent=darkThemes.includes(next)?'☀️':'🌙';
+}
+
+// ── LAST SESSION RESTORE ──
+function saveSession(){
+  const session={
+    date: document.getElementById('date').value,
+    prev_due: document.getElementById('prev_due').value.replace(/,/g,''), // raw number
+    number: document.getElementById('number').value,
+    bank: document.getElementById('bank').value,
+    b2b_bank: document.getElementById('b2b_bank').value,
+    usdt_expr: document.getElementById('usdt_expr').value,
+    usdt_rate: document.getElementById('usdt_rate').value,
+    nagad_expr: document.getElementById('nagad_expr').value,
+    nagad_b2b_expr: document.getElementById('nagad_b2b_expr').value,
+    agents: JSON.parse(JSON.stringify(agents)),
+    savedAt: Date.now()
+  };
+  localStorage.setItem('ds_session', JSON.stringify(session));
+}
+
+function restoreSession(){
+  showSkeleton();
+  try {
+    const s = JSON.parse(localStorage.getItem('ds_session')||'{}');
+    if(!s.savedAt) return;
+    // Only restore if saved today
+    const today = new Date().toDateString();
+    const savedDay = new Date(s.savedAt).toDateString();
+    if(today !== savedDay) return;
+    // Restore all fields exactly as saved — no reformatting
+    const sr=(id,val)=>{if(val!==undefined&&val!==null&&val!==''){document.getElementById(id).value=val;updateScrollBtn(id);}};
+    sr('date',       s.date);
+    sr('prev_due',   s.prev_due);
+    sr('number',     s.number);
+    sr('bank',       s.bank);
+    sr('b2b_bank',   s.b2b_bank);
+    sr('usdt_expr',  s.usdt_expr);
+    sr('usdt_rate',  s.usdt_rate);
+    sr('nagad_expr', s.nagad_expr);
+    sr('nagad_b2b_expr', s.nagad_b2b_expr);
+    if(s.agents && Array.isArray(s.agents)){
+      agents = s.agents;
+      renderAgents();
+    }
+    calc();
+    if(s.number||s.bank||s.prev_due) showToast('🔄 আগের session restore হয়েছে');
+  } catch(e){}
+  setTimeout(hideSkeleton, 600);
+}
+
+// Auto-save session every 3 seconds
+setInterval(saveSession, 3000);
+
+// ── SPLASH HIDE ──
+function hideSplash(){
+  const s = document.getElementById('splash');
+  if(!s) return;
+  s.style.opacity = '0';
+  setTimeout(()=>{ s.style.display='none'; }, 500);
+}
+
+setDateToday();
+restoreSession();
+showDailyQuote();
+updateClock();
+initPin();
+renderFavBar();
+setTimeout(hideSplash, 1500);
+setTimeout(hideSkeleton, 800);
+
+// Header toggle
+let hdrCollapsed=false;
+function toggleHdr(){
+  hdrCollapsed=!hdrCollapsed;
+  const hdr=document.querySelector('.hdr');
+  const tabs=document.querySelector('.tabs');
+  if(hdrCollapsed){
+    hdr.style.transform='translateY(-100%)';
+    hdr.style.marginBottom='-'+hdr.offsetHeight+'px';
+    tabs.style.top='0';
+  } else {
+    hdr.style.transform='';
+    hdr.style.marginBottom='';
+    tabs.style.top='';
+  }
+}
+
+// Bottom bar toggle
+let bbarVisible=true;
+function toggleBbar(){
+  const bar=document.querySelector('.bbar');
+  const handle=document.getElementById('bbar-handle');
+  bbarVisible=!bbarVisible;
+  if(bbarVisible){
+    bar.classList.remove('hidden');
+    handle.classList.add('up');
+    handle.title='Hide';
+  } else {
+    bar.classList.add('hidden');
+    handle.classList.remove('up');
+    handle.style.bottom='0';
+    handle.title='Show';
+  }
+}
+
+
+// ── FIELD SCROLL TO END ──
+function scrollFieldEnd(id){
+  var el = document.getElementById(id);
+  if(!el) return;
+  el.focus();
+  el.scrollLeft = el.scrollWidth;
+  var len = el.value.length;
+  el.setSelectionRange(len, len);
+}
+function updateScrollBtn(id){
+  var el = document.getElementById(id);
+  var btn = document.getElementById('scroll-btn-'+id);
+  if(btn) btn.style.display = (el && el.value.trim().length > 0) ? 'inline-block' : 'none';
+}
+
+// ── LANGUAGE SYSTEM ──
+const LANG = {
+  bn: {
+    'prev_due_label':'Previous Due','cashout_label':'Cash Out','bank_label':'Bank',
+    'comm_label':'Commission','today_total_label':'Today Total (No Comm)',
+    'subtotal_label':'Subtotal (Inc. Comm)','usdt_label':'USDT Settlement',
+    'final_due_label':'Final Due','save_btn':'💾 Save','reset_btn':'🔄 Reset',
+    'copy_btn':'📋 Copy','history_tab':'📜 History','calc_tab':'🧮 Calc',
+    'settings_title':'⚙️ Settings','no_data':'উপরে data দিলে এখানে text আসবে',
+    'amount_lbl':'Amount','nagad_total':'Nagad Total','bank_total':'Bank Total',
+    'co_total':'Cash Out Total'
+  },
+  en: {
+    'prev_due_label':'Previous Due','cashout_label':'Cash Out','bank_label':'Bank',
+    'comm_label':'Commission','today_total_label':'Today Total (No Comm)',
+    'subtotal_label':'Subtotal (Inc. Comm)','usdt_label':'USDT Settlement',
+    'final_due_label':'Final Due','save_btn':'💾 Save','reset_btn':'🔄 Reset',
+    'copy_btn':'📋 Copy','history_tab':'📜 History','calc_tab':'🧮 Calc',
+    'settings_title':'⚙️ Settings','no_data':'Enter data above to generate text',
+    'amount_lbl':'Amount','nagad_total':'Nagad Total','bank_total':'Bank Total',
+    'co_total':'Cash Out Total'
+  }
+};
+let currentLang = localStorage.getItem('ds_lang')||'bn';
+function setLang(lang){
+  currentLang=lang;
+  localStorage.setItem('ds_lang',lang);
+  // update lang buttons
+  var bn=document.getElementById('lang-bn');
+  var en=document.getElementById('lang-en');
+  if(bn&&en){
+    var acc=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#f59e0b';
+    bn.style.border=lang==='bn'?'2px solid '+acc:'2px solid transparent';
+    en.style.border=lang==='en'?'2px solid '+acc:'2px solid transparent';
+  }
+  showToast(lang==='bn'?'🇧🇩 বাংলা selected':'🇬🇧 English selected');
+}
+(function(){ setLang(currentLang); })();
+
+// ── ACCENT COLOR ──
+function setAccent(color){
+  document.documentElement.style.setProperty('--accent',color);
+  localStorage.setItem('ds_accent',color);
+  // update accent opt borders
+  document.querySelectorAll('.accent-opt').forEach(function(b){
+    b.style.border=b.dataset.c===color?'3px solid '+color:'3px solid transparent';
+    b.style.outline=b.dataset.c===color?'2px solid rgba(0,0,0,.3)':'none';
+  });
+  var cp=document.getElementById('custom-color-pick');
+  if(cp)cp.value=color.length===7?color:'#f59e0b';
+  // update tab active color
+  var style=document.getElementById('accent-style');
+  if(!style){style=document.createElement('style');style.id='accent-style';document.head.appendChild(style);}
+  style.textContent='.tab.active{color:'+color+'!important;border-bottom-color:'+color+'!important;}'
+    +'.fi:focus{border-bottom-color:'+color+'!important;}'
+    +'#calc-result{color:var(--tx)!important;}'
+    +'.af-badge{background:linear-gradient(135deg,'+color+'22,'+color+'44)!important;color:'+color+'!important;}';
+}
+(function(){
+  var saved=localStorage.getItem('ds_accent');
+  if(saved)setAccent(saved);
+  // init accent opt borders
+  var acc=saved||'#f59e0b';
+  document.querySelectorAll('.accent-opt').forEach(function(b){
+    b.style.border=b.dataset.c===acc?'3px solid '+acc:'3px solid transparent';
+  });
+})();
+
+// ── PRIVATE MODE ──
+var privateMode=localStorage.getItem('ds_private')==='1';
+function applyPrivate(){
+  document.body.classList.toggle('private-on',privateMode);
+  var btn=document.getElementById('private-toggle');
+  var knob=document.getElementById('private-knob');
+  var prvBtn=document.getElementById('prv-btn');
+  if(btn){btn.style.background=privateMode?'#f59e0b':'#ddd';}
+  if(knob){knob.style.left=privateMode?'27px':'3px';}
+  if(prvBtn){prvBtn.textContent=privateMode?'🙈':'👁️';prvBtn.style.background=privateMode?'rgba(245,158,11,.3)':'rgba(255,255,255,.1)';}
+}
+function togglePrivate(){
+  privateMode=!privateMode;
+  localStorage.setItem('ds_private',privateMode?'1':'0');
+  applyPrivate();
+  showToast(privateMode?'🔒 Private Mode চালু':'👁️ Private Mode বন্ধ');
+}
+applyPrivate();
+
+// ── SKELETON LOADER ──
+function showSkeleton(){
+  var sk=document.getElementById('skeleton-loader');
+  if(sk){sk.style.display='block';}
+  // hide tab content via class, not inline style
+  document.querySelectorAll('.tab-panel').forEach(function(p){p.style.visibility='hidden';p.style.minHeight='0';p.style.height='0';p.style.overflow='hidden';});
+}
+function hideSkeleton(){
+  var sk=document.getElementById('skeleton-loader');
+  if(sk){sk.style.display='none';}
+  // restore tab panels — let CSS/active class handle display
+  document.querySelectorAll('.tab-panel').forEach(function(p){p.style.visibility='';p.style.minHeight='';p.style.height='';p.style.overflow='';});
+}
+
+</script>
